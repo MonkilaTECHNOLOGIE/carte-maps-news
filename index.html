@@ -65,7 +65,7 @@
                         path.push({ lat: coords[1], lng: coords[0] });
                     });
                     
-                    let polyline = new google.maps.Polyline({
+                    /* let polyline = new google.maps.Polyline({
                         path: path,
                         geodesic: true,
                         strokeColor: "#FFFFFF",
@@ -73,7 +73,7 @@
                         strokeWeight: 2
                     });
                     polyline.setMap(map);
-                    polylines.push(polyline);
+                    polylines.push(polyline); */
                     
                     calculateDistances();
                 });
