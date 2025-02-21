@@ -65,7 +65,8 @@
                         let coords = feature.geometry.coordinates;
                         let name = feature.properties.Name;
                         let description = feature.properties.description;
-                        let poteauType = feature.properties.type_poteau || "Inconnu";
+                        //let poteauType = feature.properties.type_poteau || "Inconnu";
+                        let poteauType = feature.type || "Inconnu";
 
                         let marker = new google.maps.Marker({
                             position: { lat: coords[1], lng: coords[0] },
@@ -109,7 +110,7 @@
 
                             let labelDiv = document.createElement("div");
                             labelDiv.style.position = "absolute";
-                            labelDiv.style.color = "white";
+                            labelDiv.style.color = "red";
                             labelDiv.style.fontSize = "14px";
                             labelDiv.style.fontWeight = "bold";
                             labelDiv.style.textShadow = "1px 1px 2px black";
