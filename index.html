@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Carte Maps</title>
+    <title>Carte Yango avec Google Maps</title>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCtdy9oLt_yR5nNM0FsJJGQwCoIMlndwZs&libraries=geometry"></script>
     <script>
         let map;
         let markers = [];
         let polylines = [];
+        let layers = {};
+        let distanceLabels = [];
 
         function initMap() {
             map = new google.maps.Map(document.getElementById("map"), {
@@ -21,21 +23,47 @@
                 ]
             });
             
-            loadGeoJSON("data/BRANCHE.geojson", "red");
-            loadGeoJSON("data/CABINE.geojson", "blue");
-            loadGeoJSON("data/DEPART.geojson", "green");
-            loadGeoJSON("data/POCHE.geojson", "yellow");
+            addSidebar();
+            loadGeoJSON("data/BRANCHE.geojson", "red", "Branche");
+            loadGeoJSON("data/CABINE.geojson", "blue", "Cabine");
+            loadGeoJSON("data/DEPART.geojson", "green", "Départ");
+            loadGeoJSON("data/POCHE.geojson", "yellow", "Poche");
         }
 
-        function loadGeoJSON(url, color) {
+        function addSidebar() {
+            let sidebar = document.createElement("div");
+            sidebar.id = "sidebar";
+            sidebar.innerHTML = `
+                <button id="toggleSidebar">☰</button>
+                <div id="sidebarContent">
+                    <h3>Les données</h3>
+                    <div id="layerControls"></div>
+                    <div id="layerControls"></div>
+                    <h3>Légende</h3>
+                    <p><span style="color: red;">⬤</span> Branche</p>
+                    <p><span style="color: blue;">⬤</span> Cabine</p>
+                    <p><span style="color: green;">⬤</span> Départ</p>
+                    <p><span style="color: yellow;">⬤</span> Poche</p>
+                </div>
+            `;
+            document.body.appendChild(sidebar);
+            document.getElementById("toggleSidebar").addEventListener("click", () => {
+                sidebar.classList.toggle("open");
+            });
+        }
+
+        function loadGeoJSON(url, color, label) {
             fetch(url)
                 .then(response => response.json())
                 .then(data => {
                     let path = [];
+                    let group = [];
+                    
                     data.features.forEach(feature => {
                         let coords = feature.geometry.coordinates;
                         let name = feature.properties.Name;
                         let description = feature.properties.description;
+                        let poteauType = feature.properties.type_poteau || "Inconnu";
                         
                         let marker = new google.maps.Marker({
                             position: { lat: coords[1], lng: coords[0] },
@@ -49,7 +77,7 @@
                         });
                         
                         let infoWindow = new google.maps.InfoWindow({
-                            content: `<b>${name}</b><br>${description}`
+                            content: `<b>${name}</b><br>${description}<br><b>Type Poteau:</b> ${poteauType}`
                         });
 
                         marker.addListener("mouseover", () => {
@@ -62,62 +90,105 @@
                         });
 
                         markers.push(marker);
+                        group.push(marker);
                         path.push({ lat: coords[1], lng: coords[0] });
                     });
                     
-                    /* let polyline = new google.maps.Polyline({
+                    if (path.length > 1) {
+                        for (let i = 0; i < path.length - 1; i++) {
+                            let distance = google.maps.geometry.spherical.computeDistanceBetween(
+                                new google.maps.LatLng(path[i]),
+                                new google.maps.LatLng(path[i + 1])
+                            );
+                            let midpoint = {
+                                lat: (path[i].lat + path[i + 1].lat) / 2,
+                                lng: (path[i].lng + path[i + 1].lng) / 2
+                            };
+
+                            let label = new google.maps.Marker({
+                                position: midpoint,
+                                map: map,
+                                label: {
+                                    text: `${(distance / 1000).toFixed(2)} km`,
+                                    color: "#FFF",
+                                    fontWeight: "bold",
+                                    fontSize: "14px"
+                                }
+                            });
+
+                            distanceLabels.push(label);
+                        }
+                    }
+                    
+                    let polyline = new google.maps.Polyline({
                         path: path,
                         geodesic: true,
                         strokeColor: "#FFFFFF",
                         strokeOpacity: 1.0,
                         strokeWeight: 2
                     });
+
                     polyline.setMap(map);
-                    polylines.push(polyline); */
+                    polylines.push(polyline);
+                    group.push(polyline);
+                    layers[label] = group;
                     
-                    calculateDistances();
+                    addLayerControl(label);
                 });
         }
 
-        function calculateDistances() {
-            for (let i = 0; i < markers.length - 1; i++) {
-                let origin = markers[i].getPosition();
-                let destination = markers[i + 1].getPosition();
-                let distance = google.maps.geometry.spherical.computeDistanceBetween(origin, destination) / 1000;
-                
-                let midLat = (origin.lat() + destination.lat()) / 2;
-                let midLng = (origin.lng() + destination.lng()) / 2;
-                
-                let distanceMarker = new google.maps.Marker({
-                    position: { lat: midLat, lng: midLng },
-                    map: map,
-                    icon: {
-                        path: google.maps.SymbolPath.CIRCLE,
-                        scale: 5,
-                        fillColor: "rgb(70, 10, 10)",
-                        fillOpacity: 1,
-                        strokeWeight: 0
-                    },
-                    label: {
-                        text: `${distance.toFixed(2)} km`,
-                        color: "#FFFFFF",
-                        fontSize: "12px",
-                        fontWeight: "bold"
-                    }
-                });
+        function addLayerControl(label) {
+            let container = document.getElementById("layerControls");
+            let checkbox = document.createElement("input");
+            checkbox.type = "checkbox";
+            checkbox.checked = true;
+            checkbox.id = `layer_${label}`;
+            checkbox.addEventListener("change", function() {
+                toggleLayer(label, this.checked);
+            });
+            let labelElement = document.createElement("label");
+            labelElement.htmlFor = `layer_${label}`;
+            labelElement.textContent = label;
+            container.appendChild(checkbox);
+            container.appendChild(labelElement);
+            container.appendChild(document.createElement("br"));
+        }
+
+        function toggleLayer(label, show) {
+            if (layers[label]) {
+                layers[label].forEach(item => item.setMap(show ? map : null));
             }
         }
     </script>
+    <style>
+        #sidebar {
+            position: fixed;
+            top: 0;
+            left: -250px;
+            width: 250px;
+            height: 100%;
+            background: white;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
+            transition: left 0.3s ease;
+            padding: 10px;
+        }
+        #sidebar.open {
+            left: 0;
+        }
+        #toggleSidebar {
+            position: absolute;
+            top: 10px;
+            right: -40px;
+            width: 30px;
+            height: 30px;
+            background: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body onload="initMap()">
     <div id="map" style="width: 100%; height: 600px;"></div>
-    <!-- <div id="legend" style="background: #fff; padding: 10px; margin-top: 10px;">
-        <h3>Légende</h3>
-        <p><span style="color: red;">■</span> Branche</p>
-        <p><span style="color: blue;">■</span> Cabine</p>
-        <p><span style="color: green;">■</span> Départ</p>
-        <p><span style="color: yellow;">■</span> Poche</p>
-        <p><span style="color: rgb(70, 10, 10);">●</span> Distance entre points</p>
-    </div> -->
 </body>
 </html>
