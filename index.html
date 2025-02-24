@@ -66,7 +66,7 @@
                         let name = feature.properties.Name;
                         let description = feature.properties.description;
                         //let poteauType = feature.properties.type_poteau || "Inconnu";
-                        let poteauType = feature.type || "Inconnu";
+                        let poteauType = feature.type_poteau || "Inconnu";
 
                         let marker = new google.maps.Marker({
                             position: { lat: coords[1], lng: coords[0] },
