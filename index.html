@@ -4,7 +4,7 @@
 <head>
     <title>Carte Yango avec Google Maps</title>
     <script
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDaWSDqKG4QHeJ11BEMq-0-9nhNRSVT-Kg&libraries=geometry"></script>
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCtdy9oLt_yR5nNM0FsJJGQwCoIMlndwZs&libraries=geometry"></script>
     <script>
         let map;
         let markers = [];
@@ -55,11 +55,14 @@
         }
 
         function loadGeoJSON(url, color, label) {
+            
+
             fetch(url)
                 .then(response => response.json())
                 .then(data => {
                     let path = [];
                     let group = [];
+                    let newLabel = "AUTRES";
 
                     data.features.forEach(feature => {
                         let coords = feature.geometry.coordinates;
@@ -71,12 +74,15 @@
 
                         if(poteauType == "PAF"){
                             newColor = "red";
+                            newLabel = "PAF";
                         }else if(poteauType == "PAM"){
                             newColor = "yellow";
+                            newLabel = "PAM";
                         }else if(poteauType == "PAL"){
                             newColor = "green";
+                            newLabel = "PAL";
                         }else if(poteauType == "Inconnu"){
-                            newColor = "blue"
+                            newColor = "blue";
                         }
 
                         let marker = new google.maps.Marker({
@@ -175,6 +181,7 @@
             labelElement.textContent = label;
             container.appendChild(checkbox);
             container.appendChild(labelElement);
+            container.appendChild(document.createElement("br"));
             container.appendChild(document.createElement("br"));
         }
 
