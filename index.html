@@ -4,6 +4,7 @@
 <head>
     <title>Carte Yango avec Google Maps</title>
     <script
+    
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCtdy9oLt_yR5nNM0FsJJGQwCoIMlndwZs&libraries=geometry"></script>
     <script>
         let map;
@@ -158,10 +159,11 @@
                         strokeWeight: 2
                     });
 
-                    /* polyline.setMap(map);
+                    /*polyline.setMap(map);
                     polylines.push(polyline);
-                    group.push(polyline);
-                    layers[label] = group; */
+                    group.push(polyline);*/
+
+                    layers[label] = group; 
 
                     addLayerControl(label);
                 });
