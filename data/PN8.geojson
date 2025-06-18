@@ -1,0 +1,577 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "20KV/02",
+        "type": "PAF",
+        "height": 13.0,
+        "observations": "PAF 02 Séparation des PN7 et PN8"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [524035.3, 9501935.08]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "20KV/03",
+        "type": "PAL",
+        "height": 13.0,
+        "observations": ""
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [524013.05, 9501845.58]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "20KV/04",
+        "type": "PAL",
+        "height": 13.0,
+        "observations": ""
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [523953.66, 9501795.02]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "20KV/05",
+        "type": "PAL",
+        "height": 13.0,
+        "observations": ""
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [523895.79, 9501742.72]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "20KV/06",
+        "type": "PAF",
+        "height": 13.0,
+        "observations": "Haute Tension (HT)"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [523833.0, 9501692.29]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "20KV/07",
+        "type": "PAF",
+        "height": 13.0,
+        "observations": ""
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [523670.59, 9501715.08]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "20KV/08",
+        "type": "PAF",
+        "height": 13.0,
+        "observations": ""
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [523615.03, 9501717.77]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "20KV/09",
+        "type": "PAF",
+        "height": 13.0,
+        "observations": ""
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [523611.95, 9501693.48]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "20KV/10",
+        "type": "PAM",
+        "height": 13.0,
+        "observations": ""
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [523555.4, 9501693.95]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "20KV/11",
+        "type": "PAM",
+        "height": 13.0,
+        "observations": ""
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [523523.14, 9501703.21]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "20KV/12",
+        "type": "PAF",
+        "height": 13.0,
+        "observations": ""
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [523495.24, 9501730.23]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "20KV/13",
+        "type": "PAL",
+        "height": 13.0,
+        "observations": ""
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [523476.22, 9501708.42]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "20KV/14",
+        "type": "PAL",
+        "height": 13.0,
+        "observations": ""
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [523445.65, 9501656.45]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "20KV/15",
+        "type": "PAL",
+        "height": 13.0,
+        "observations": ""
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [523414.63, 9501604.73]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "20KV/16",
+        "type": "PAF",
+        "height": 13.0,
+        "observations": ""
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [523389.05, 9501549.66]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "20KV/17",
+        "type": "PAL",
+        "height": 13.0,
+        "observations": ""
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [523347.93, 9501590.28]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "20KV/18",
+        "type": "PAL",
+        "height": 13.0,
+        "observations": ""
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [523306.8, 9501630.9]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "20KV/19",
+        "type": "PAF",
+        "height": 13.0,
+        "observations": ""
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [523265.67, 9501671.53]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "20KV/20",
+        "type": "PAF",
+        "height": 13.0,
+        "observations": ""
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [523292.29, 9501697.35]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "20KV/21",
+        "type": "PAL",
+        "height": 13.0,
+        "observations": ""
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [523257.87, 9501731.24]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "20KV/22",
+        "type": "PAF/PPRO 8-2",
+        "height": 13.0,
+        "observations": "PPRO 8-2 Dérivation"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [523223.46, 9501765.11]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "20KV/23",
+        "type": "PAL",
+        "height": 13.0,
+        "observations": ""
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [523170.52, 9501813.29]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "20KV/24",
+        "type": "PAL",
+        "height": 13.0,
+        "observations": ""
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [523130.28, 9501838.1]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "20KV/25",
+        "type": "PAF",
+        "height": 13.0,
+        "observations": ""
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [523074.23, 9501856.92]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "20KV/26",
+        "type": "PAL",
+        "height": 13.0,
+        "observations": ""
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [523082.59, 9501818.52]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "20KV/27",
+        "type": "PAF/PPRO 8-4",
+        "height": 13.0,
+        "observations": "PPRO 8-4 Dérivation"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [523081.48, 9501785.28]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "20KV/28",
+        "type": "PAF/PPRO 8-5",
+        "height": 13.0,
+        "observations": "PPRO 8-5 Dérivation"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [523072.28, 9501715.22]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "20KV/29",
+        "type": "PAL",
+        "height": 13.0,
+        "observations": ""
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [523102.4, 9501697.72]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "20KV/30",
+        "type": "PAL",
+        "height": 13.0,
+        "observations": ""
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [523135.71, 9501664.59]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "20KV/31",
+        "type": "PAL",
+        "height": 13.0,
+        "observations": ""
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [523165.32, 9501627.26]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "20KV/32",
+        "type": "PAL",
+        "height": 13.0,
+        "observations": ""
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [523194.93, 9501589.92]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "20KV/33",
+        "type": "PAF",
+        "height": 13.0,
+        "observations": ""
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [523232.82, 9501557.32]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "20KV/34",
+        "type": "PAL",
+        "height": 13.0,
+        "observations": ""
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [523229.61, 9501512.72]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "20KV/35",
+        "type": "PAM",
+        "height": 13.0,
+        "observations": ""
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [523233.36, 9501450.58]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "20KV/36",
+        "type": "PAM",
+        "height": 13.0,
+        "observations": ""
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [523212.7, 9501409.05]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "20KV/37",
+        "type": "PAL",
+        "height": 13.0,
+        "observations": ""
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [523179.58, 9501372.39]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "20KV/38",
+        "type": "PAM",
+        "height": 13.0,
+        "observations": ""
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [523147.77, 9501314.02]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "20KV/39",
+        "type": "PAF/PPRO 8-1",
+        "height": 13.0,
+        "observations": "PPRO 8-1 Dérivation"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [523099.6, 9501275.59]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "20KV/22",
+        "type": "PAF/PPRO 8-2",
+        "height": 12.1,
+        "observations": "PPRO 8-2 Dérivation"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [523223.46, 9501765.11]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "11KV/22/01",
+        "type": "PAL",
+        "height": 12.1,
+        "observations": ""
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [523262.96, 9501810.95]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "11KV/22/02",
+        "type": "PAL",
+        "height": 12.1,
+        "observations": ""
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [523302.28, 9501856.92]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "11KV/22/03",
+        "type": "PAF",
+        "height": 12.1,
+        "observations": ""
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [523341.6, 9501902.85]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "11KV/22/04",
+        "type": "PAL",
+        "height": 12.1,
+        "observations": ""
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [523362.66, 9501884.42]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "11KV/22/05",
+        "type": "PAF/PPRO 8-3",
+        "height": 12.1,
+        "observations": "PPRO 8-3 Dérivation"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [523223.46, 9501765.11]
+      }
+    }
+  ]
+}

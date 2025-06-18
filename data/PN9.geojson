@@ -1,0 +1,317 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "Poste",
+        "type": "Poste",
+        "height": null,
+        "observations": "SORTIE POSTE"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [524055.76, 9501982.56]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "20KV P,01",
+        "type": "PAF",
+        "height": 13.0,
+        "observations": "MONTEE AERO SOUTERRAINE"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [523924.09, 9502217.86]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "20KV P,02",
+        "type": "PAL",
+        "height": 13.0,
+        "observations": ""
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [523845.82, 9502240.08]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "20KV P,03",
+        "type": "PAL",
+        "height": 13.0,
+        "observations": ""
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [523767.55, 9502262.29]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "20KV P,04",
+        "type": "PAL",
+        "height": 13.0,
+        "observations": ""
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [523689.29, 9502284.51]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "20KV P,05",
+        "type": "PAL",
+        "height": 13.0,
+        "observations": ""
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [523611.02, 9502306.73]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "20KV P,06",
+        "type": "PAL",
+        "height": 13.0,
+        "observations": "Haute Tension (HT)"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [523532.81, 9502328.93]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "20KV P,07",
+        "type": "PAM",
+        "height": 13.0,
+        "observations": ""
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [523464.27, 9502348.36]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "20KV P,08",
+        "type": "PAL",
+        "height": 13.0,
+        "observations": ""
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [523395.72, 9502367.79]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "20KV P,09",
+        "type": "PAL",
+        "height": 13.0,
+        "observations": ""
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [523323.26, 9502388.47]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "20KV P,10",
+        "type": "PAL",
+        "height": 13.0,
+        "observations": ""
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [523250.81, 9502409.15]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "20KV P,11",
+        "type": "PAL",
+        "height": 13.0,
+        "observations": ""
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [523201.0, 9502424.22]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "20KV P,12",
+        "type": "PAL",
+        "height": 13.0,
+        "observations": ""
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [523151.18, 9502439.3]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "20KV P,13",
+        "type": "PAL",
+        "height": 13.0,
+        "observations": ""
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [523476.22, 9501708.42]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "20KV P,14",
+        "type": "PAF",
+        "height": 13.0,
+        "observations": ""
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [523097.89, 9502469.91]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "20KV P,15",
+        "type": "PAM",
+        "height": 13.0,
+        "observations": ""
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [523020.64, 9502487.6]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "20KV P,16",
+        "type": "PAL",
+        "height": 13.0,
+        "observations": "Parquet Militaire"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [523097.89, 9502469.91]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "20KV P,17",
+        "type": "PAL",
+        "height": 13.0,
+        "observations": "Eglise la Borne"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [522868.53, 9502521.66]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "20KV P,18",
+        "type": "PAL",
+        "height": 13.0,
+        "observations": "Eglise la Louange"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [522714.17, 9502538.36]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "20KV P,19",
+        "type": "PAF",
+        "height": 13.0,
+        "observations": "Concession Bralima"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [522722.92, 9502537.84]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "20KV P,20",
+        "type": "PAF",
+        "height": 13.0,
+        "observations": ""
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [522645.38, 9502542.4]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "20KV P,21",
+        "type": "PAL",
+        "height": 13.0,
+        "observations": ""
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [522628.07, 9502576.8]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "20KV P,22",
+        "type": "PAF/PPRO 8-2",
+        "height": 13.0,
+        "observations": "PPRO 8-2 Dérivation"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [523223.46, 9501765.11]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "20KV P,41",
+        "type": "PAF/PPRO 9-5'",
+        "height": 13.0,
+        "observations": "PPRO 9-5' Dérivation"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [522114.52, 9503622.73]
+      }
+    }
+  ]
+}

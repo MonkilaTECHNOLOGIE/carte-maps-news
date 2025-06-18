@@ -1,0 +1,628 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "20KVP,29",
+        "type": "PAF",
+        "height": 13.0,
+        "observations": ""
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [524492.48, 9504584.9]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "20KVP,64",
+        "type": "PAL",
+        "height": 13.0,
+        "observations": ""
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [524485.83, 9504662.17]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "20KVP,65",
+        "type": "PAF",
+        "height": 13.0,
+        "observations": "DESCENTE AERO SOUTERRAINE"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [524508.36, 9504738.34]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "20KVP,66",
+        "type": "PAF",
+        "height": 13.0,
+        "observations": "MONTEE AERO SOUTERRAINE"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [524519.74, 9504776.8]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "20KVP,67",
+        "type": "PAL",
+        "height": 13.0,
+        "observations": ""
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [524536.57, 9504833.71]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "20KVP,68",
+        "type": "PAL",
+        "height": 13.0,
+        "observations": ""
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [524553.4, 9504890.6]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "20KVP,69",
+        "type": "PAL",
+        "height": 13.0,
+        "observations": ""
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [524562.26, 9504946.77]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "20KVP,70",
+        "type": "PAL",
+        "height": 13.0,
+        "observations": ""
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [524583.87, 9505021.49]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "20KVP,71",
+        "type": "PAL",
+        "height": 13.0,
+        "observations": ""
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [524605.49, 9505096.22]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "20KVP,72",
+        "type": "PAL",
+        "height": 13.0,
+        "observations": ""
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [524627.1, 9505170.952]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "20KVP,73",
+        "type": "PAM",
+        "height": 13.0,
+        "observations": ""
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [524648.71, 9505245.67]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "20KVP,74",
+        "type": "PAL",
+        "height": 13.0,
+        "observations": ""
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [524670.33, 9505320.4]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "20KVP,75",
+        "type": "PAL",
+        "height": 13.0,
+        "observations": ""
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [524691.94, 9505395.13]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "20KVP,76",
+        "type": "PAL",
+        "height": 13.0,
+        "observations": ""
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [524713.55, 9505469.86]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "20KVP,77",
+        "type": "PAL",
+        "height": 13.0,
+        "observations": ""
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [524735.16, 9505544.58]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "20KVP,78",
+        "type": "PAL",
+        "height": 13.0,
+        "observations": ""
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [524756.78, 9505619.31]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "20KVP,79",
+        "type": "PAM",
+        "height": 13.0,
+        "observations": ""
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [524778.39, 9505694.04]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "20KVP,80",
+        "type": "PAL",
+        "height": 13.0,
+        "observations": ""
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [524800.01, 9505768.77]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "20KVP,81",
+        "type": "PAL",
+        "height": 13.0,
+        "observations": "L'HOPITAL MATER DEI"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [524821.62, 9505843.49]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "20KVP,82",
+        "type": "PAM",
+        "height": 13.0,
+        "observations": ""
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [524843.21, 9505918.16]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "20KVP,83",
+        "type": "PAL",
+        "height": 13.0,
+        "observations": ""
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [524860.27, 9505966.01]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "20KVP,84",
+        "type": "PAL",
+        "height": 13.0,
+        "observations": ""
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [524877.33, 9506013.84]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "20KVP,85",
+        "type": "PAL",
+        "height": 13.0,
+        "observations": ""
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [524890.96, 9506055.36]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "20KVP,86",
+        "type": "PAL",
+        "height": 13.0,
+        "observations": ""
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [524904.6, 9506096.89]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "20KVP,87",
+        "type": "PAL",
+        "height": 13.0,
+        "observations": ""
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [524923.96, 9506139.15]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "20KVP,88",
+        "type": "PAF",
+        "height": 13.0,
+        "observations": "DESCENTE AERO SOUTERRAINE"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [524946.32, 9506187.97]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "20KVP,89",
+        "type": "PAF",
+        "height": 13.0,
+        "observations": "MONTEE AERO SOUTERRAINE"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [524963.61, 9506212.58]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "20KVP,90",
+        "type": "PAL",
+        "height": 13.0,
+        "observations": ""
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [525007.48, 9506249.29]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "20KVP,91",
+        "type": "PAM",
+        "height": 13.0,
+        "observations": ""
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [525051.37, 9506286.03]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "20KVP,92",
+        "type": "PAL",
+        "height": 13.0,
+        "observations": ""
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [525097.79, 9506304.89]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "20KVP,93",
+        "type": "PAL",
+        "height": 13.0,
+        "observations": ""
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [525145.51, 9506324.3]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "20KVP,94",
+        "type": "PAL",
+        "height": 13.0,
+        "observations": ""
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [525220.81, 9506334.65]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "20KVP,95",
+        "type": "PAL",
+        "height": 13.0,
+        "observations": ""
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [525296.1, 9506345.01]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "20KVP,96",
+        "type": "PAL",
+        "height": 13.0,
+        "observations": ""
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [525371.39, 9506355.38]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "20KVP,97",
+        "type": "PAM",
+        "height": 13.0,
+        "observations": ""
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [525408.3, 9506358.25]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "20KVP,98",
+        "type": "PAL",
+        "height": 13.0,
+        "observations": ""
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [525465.67, 9506366.94]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "20KVP,99",
+        "type": "PAL",
+        "height": 13.0,
+        "observations": ""
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [525523.05, 9506375.65]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "20KVP,100",
+        "type": "PAL",
+        "height": 13.0,
+        "observations": ""
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [525580.42, 9506384.38]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "20KVP,101",
+        "type": "PAL",
+        "height": 13.0,
+        "observations": ""
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [525637.65, 9506378.12]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "20KVP,102",
+        "type": "PAM",
+        "height": 13.0,
+        "observations": ""
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [525669.57, 9506368.12]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "20KVP,103",
+        "type": "PAM",
+        "height": 13.0,
+        "observations": ""
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [525737.92, 9506365.98]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "20KVP,104",
+        "type": "PAF",
+        "height": 13.0,
+        "observations": ""
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [525789.59, 9506349.22]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "20KVP,105",
+        "type": "PAF",
+        "height": 13.0,
+        "observations": ""
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [525787.08, 9506328.45]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "20KVP,106",
+        "type": "PAM",
+        "height": 13.0,
+        "observations": ""
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [525864.46, 9506316.0]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "20KVP,107",
+        "type": "PAL",
+        "height": 13.0,
+        "observations": ""
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [525941.83, 9506303.47]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "20KVP,108",
+        "type": "PAL",
+        "height": 13.0,
+        "observations": ""
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [526019.19, 9506290.92]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "20KVP,109",
+        "type": "PAF/PPRO 11-2",
+        "height": 13.0,
+        "observations": "PAF/PPRO 11-2"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [526097.14, 9506283.17]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "20KVP,110",
+        "type": "PAL",
+        "height": 13.0,
+        "observations": ""
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [526108.54, 9506211.04]
+      }
+    }
+    ]}

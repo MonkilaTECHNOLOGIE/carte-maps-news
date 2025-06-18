@@ -4,8 +4,9 @@
 <head>
     <title>Carte Yango avec Google Maps</title>
     <script
-    
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCtdy9oLt_yR5nNM0FsJJGQwCoIMlndwZs&libraries=geometry"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/proj4js/2.8.0/proj4.js"></script>
+
     <script>
         let map;
         let markers = [];
@@ -30,7 +31,11 @@
             loadGeoJSON("data/BRANCHE.geojson", "red", "Branche");
             loadGeoJSON("data/CABINE.geojson", "blue", "Cabine");
             loadGeoJSON("data/DEPART.geojson", "green", "Départ");
-            loadGeoJSON("data/POCHE.geojson", "yellow", "Poche Noire");
+            //loadGeoJSON("data/POCHE.geojson", "yellow", "Poche Noire");
+            loadGeoJSON("data/PN7.geojson", "olive", "Poche Noire 1");
+            loadGeoJSON("data/PN8.geojson", "maroon", "Poche Noire 2");
+            loadGeoJSON("data/PN9.geojson", "aqua", "Poche Noire 3");
+            loadGeoJSON("data/PN11.geojson", "fuchsia", "Poche Noire 4");
         }
 
         function addSidebar() {
@@ -56,7 +61,7 @@
         }
 
         function loadGeoJSON(url, color, label) {
-            
+
 
             fetch(url)
                 .then(response => response.json())
@@ -66,28 +71,45 @@
                     let newLabel = "AUTRES";
 
                     data.features.forEach(feature => {
+
+                    
                         let coords = feature.geometry.coordinates;
-                        let name = feature.properties.Name;
-                        let description = feature.properties.description;
+                        let name = feature.properties.Name || feature.properties.id;
+                        let description = feature.properties.description || "Aucune";
+                        let obersvation = feature.properties.observations || "Aucune";
                         //let poteauType = feature.properties.type_poteau || "Inconnu";
-                        let poteauType = feature.type_poteau || "Inconnu";
+                        let poteauType = feature.type_poteau || feature.properties.type || "Inconnu";
                         let newColor = "";
 
-                        if(poteauType == "PAF"){
+                        if (poteauType == "PAF") {
                             newColor = "red";
                             newLabel = "PAF";
-                        }else if(poteauType == "PAM"){
+                        } else if (poteauType == "PAM") {
                             newColor = "yellow";
                             newLabel = "PAM";
-                        }else if(poteauType == "PAL"){
+                        } else if (poteauType == "PAL") {
                             newColor = "green";
                             newLabel = "PAL";
-                        }else if(poteauType == "Inconnu"){
+                        } else if (poteauType == "Inconnu") {
+                            newColor = "blue";
+                        } else {
+                            newLabel = feature.properties.type;
                             newColor = "blue";
                         }
 
+                        //let convertedCoords = utmToLatLng(coords[0], coords[1], 33, true);
+
+                        let position;
+                        if (isUTM(coords)) {
+                            position = utmToLatLngWithProj4(coords[0], coords[1], 33);
+                        } else {
+                            position = { lat: coords[1], lng: coords[0] };
+                        }
+
+                        console.log(position);
+
                         let marker = new google.maps.Marker({
-                            position: { lat: coords[1], lng: coords[0] },
+                            position: position,
                             map: map,
                             title: name,
                             icon: {
@@ -98,7 +120,7 @@
                         });
 
                         let infoWindow = new google.maps.InfoWindow({
-                            content: `<b>${name}</b><br>${description}<br><b>Type Poteau:</b> ${poteauType}`
+                            content: `<b>Nom : ${name}</b><br><b>Description :</b> ${description}<br><b>Type Poteau :</b> ${poteauType}<br><b>Obersvation:</b> ${description}`
                         });
 
                         marker.addListener("mouseover", () => {
@@ -163,7 +185,7 @@
                     polylines.push(polyline);
                     group.push(polyline);*/
 
-                    layers[label] = group; 
+                    layers[label] = group;
 
                     addLayerControl(label);
                 });
@@ -192,6 +214,62 @@
                 layers[label].forEach(item => item.setMap(show ? map : null));
             }
         }
+
+        function utmToLatLng(easting, northing, zoneNumber, northernHemisphere = true) {
+            const a = 6378137.0; 
+            const e = 0.081819191; 
+            const k0 = 0.9996;
+
+            const x = easting - 500000;
+            const y = northernHemisphere ? northing : northing - 10000000;
+
+            const lonOrigin = (zoneNumber - 1) * 6 - 180 + 3;
+
+            const M = y / k0;
+            const mu = M / (a * (1 - Math.pow(e, 2) / 4 - 3 * Math.pow(e, 4) / 64 - 5 * Math.pow(e, 6) / 256));
+
+            const e1 = (1 - Math.sqrt(1 - Math.pow(e, 2))) / (1 + Math.sqrt(1 - Math.pow(e, 2)));
+
+            const J1 = (3 * e1 / 2 - 27 * Math.pow(e1, 3) / 32);
+            const J2 = (21 * Math.pow(e1, 2) / 16 - 55 * Math.pow(e1, 4) / 32);
+            const J3 = (151 * Math.pow(e1, 3) / 96);
+            const J4 = (1097 * Math.pow(e1, 4) / 512);
+
+            const fp = mu + J1 * Math.sin(2 * mu) + J2 * Math.sin(4 * mu) + J3 * Math.sin(6 * mu) + J4 * Math.sin(8 * mu);
+
+            const C1 = Math.pow(e * Math.cos(fp), 2) / (1 - Math.pow(e, 2));
+            const T1 = Math.pow(Math.tan(fp), 2);
+            const R1 = a * (1 - Math.pow(e, 2)) / Math.pow(1 - Math.pow(e * Math.sin(fp), 2), 1.5);
+            const N1 = a / Math.sqrt(1 - Math.pow(e * Math.sin(fp), 2));
+
+            const D = x / (N1 * k0);
+
+            const lat = fp - (N1 * Math.tan(fp) / R1) *
+                (Math.pow(D, 2) / 2 - (5 + 3 * T1 + 10 * C1 - 4 * Math.pow(C1, 2) - 9 * (e * e)) * Math.pow(D, 4) / 24
+                    + (61 + 90 * T1 + 298 * C1 + 45 * Math.pow(T1, 2) - 252 * (e * e) - 3 * Math.pow(C1, 2)) * Math.pow(D, 6) / 720);
+
+            const lng = lonOrigin + (D - (1 + 2 * T1 + C1) * Math.pow(D, 3) / 6
+                + (5 - 2 * C1 + 28 * T1 - 3 * Math.pow(C1, 2) + 8 * (e * e) + 24 * Math.pow(T1, 2)) * Math.pow(D, 5) / 120) / Math.cos(fp);
+
+            return {
+                lat: lat * (180 / Math.PI),
+                lng: lng * (180 / Math.PI)
+            };
+        }
+
+        function isUTM(coords) {
+            return coords[0] > 1000 && coords[0] < 1000000 && coords[1] > 9000000;
+        }
+
+        function utmToLatLngWithProj4(easting, northing, zone) {
+            const utmProj = `+proj=utm +zone=${zone} +south +ellps=WGS84 +datum=WGS84 +units=m +no_defs`;
+            const wgs84 = proj4('WGS84');
+            const [lng, lat] = proj4(utmProj, wgs84, [easting, northing]);
+            return { lat, lng };
+        }
+        
+
+
     </script>
     <style>
         #sidebar {
