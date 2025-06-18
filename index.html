@@ -14,6 +14,15 @@
         let layers = {};
         let distanceLabels = [];
 
+        let tailleDepart;
+        let tailleBranche;
+        let tailleCabine;
+        let taillePoche7;
+        let taillePoche8;
+        let taillePoche9;
+        let taillePoche11;
+        
+
         function initMap() {
             map = new google.maps.Map(document.getElementById("map"), {
                 center: { lat: -4.510754, lng: 15.222594 },
@@ -32,10 +41,10 @@
             loadGeoJSON("data/CABINE.geojson", "blue", "Cabine");
             loadGeoJSON("data/DEPART.geojson", "green", "Départ");
             //loadGeoJSON("data/POCHE.geojson", "yellow", "Poche Noire");
-            loadGeoJSON("data/PN7.geojson", "olive", "Poche Noire 1");
-            loadGeoJSON("data/PN8.geojson", "maroon", "Poche Noire 2");
-            loadGeoJSON("data/PN9.geojson", "aqua", "Poche Noire 3");
-            loadGeoJSON("data/PN11.geojson", "fuchsia", "Poche Noire 4");
+            loadGeoJSON("data/PN7.geojson", "olive", "Poche Noire 7");
+            loadGeoJSON("data/PN8.geojson", "maroon", "Poche Noire 8");
+            loadGeoJSON("data/PN9.geojson", "aqua", "Poche Noire 9");
+            loadGeoJSON("data/PN11.geojson", "fuchsia", "Poche Noire 11");
         }
 
         function addSidebar() {
@@ -52,6 +61,9 @@
                     <p><span style="color: blue;">⬤</span> Poteau</p>
                     <p><span style="color: green;">⬤</span> PAL (Poteau d'alignement)</p>
                     <p><span style="color: yellow;">⬤</span> PAM (Poteau à angle Moyen)</p>
+                    <div id="layerControls"></div>
+                    <div id="layerControls"></div>
+                    <h3>La taille</h3>
                 </div>
             `;
             document.body.appendChild(sidebar);
@@ -70,6 +82,10 @@
                     let group = [];
                     let newLabel = "AUTRES";
 
+                    let taille = data.features.length;
+
+                    
+
                     data.features.forEach(feature => {
 
                     
@@ -80,6 +96,8 @@
                         //let poteauType = feature.properties.type_poteau || "Inconnu";
                         let poteauType = feature.type_poteau || feature.properties.type || "Inconnu";
                         let newColor = "";
+
+                        
 
                         if (poteauType == "PAF") {
                             newColor = "red";
@@ -106,7 +124,9 @@
                             position = { lat: coords[1], lng: coords[0] };
                         }
 
-                        console.log(position);
+                        //console.log(position);
+
+                        
 
                         let marker = new google.maps.Marker({
                             position: position,
@@ -136,6 +156,10 @@
                         group.push(marker);
                         path.push({ lat: coords[1], lng: coords[0] });
                     });
+
+                    //console.log(`Nom: ${data.name} | Taille: ${taille}`)
+
+                    
 
                     if (path.length > 1) {
                         for (let i = 0; i < path.length - 1; i++) {
