@@ -84,6 +84,22 @@
 
                     let taille = data.features.length;
 
+                    if(data.name == 'BRANCHE'){
+                        tailleBranche = taille;
+                    }else if(data.name == 'Cabine'){
+                        tailleCabine = taille;
+                    }else if(data.name == 'DEPART'){
+                        tailleDepart = taille;
+                    }else if(data.name == 'Poche noire 7'){
+                        taillePoche7 = taille;
+                    }else if(data.name == 'Poche noire 8'){
+                        taillePoche8 = taille;
+                    }else if(data.name == 'Poche noire 9'){
+                        taillePoche9 = taille;
+                    }else if(data.name == 'Poche noire 11'){
+                        taillePoche11 = taille;
+                    }
+
                     
 
                     data.features.forEach(feature => {
