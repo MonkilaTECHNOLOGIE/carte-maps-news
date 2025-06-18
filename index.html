@@ -36,7 +36,7 @@
                 ]
             });
 
-            addSidebar();
+            
             loadGeoJSON("data/BRANCHE.geojson", "red", "Branche");
             loadGeoJSON("data/CABINE.geojson", "blue", "Cabine");
             loadGeoJSON("data/DEPART.geojson", "green", "Départ");
@@ -45,6 +45,7 @@
             loadGeoJSON("data/PN8.geojson", "maroon", "Poche Noire 8");
             loadGeoJSON("data/PN9.geojson", "aqua", "Poche Noire 9");
             loadGeoJSON("data/PN11.geojson", "fuchsia", "Poche Noire 11");
+            addSidebar();
         }
 
         function addSidebar() {
@@ -64,6 +65,13 @@
                     <div id="layerControls"></div>
                     <div id="layerControls"></div>
                     <h3>La taille</h3>
+                    <p> DEPART : ${tailleDepart} Poteaux</p>
+                    <p> BRANCHE : ${tailleBranche} Poteaux</p>
+                    <p> CABINE : ${tailleCabine} Poteaux</p>
+                    <p> POCHE NOIRE 7 : ${taillePoche7} Poteaux</p>
+                    <p> POCHE NOIRE 8 : ${taillePoche8} Poteaux</p>
+                    <p> POCHE NOIRE 9 : ${taillePoche9} Poteaux</p>
+                    <p> POCHE NOIRE 11 : ${taillePoche11} Poteaux</p>
                 </div>
             `;
             document.body.appendChild(sidebar);
@@ -90,7 +98,8 @@
                         tailleCabine = taille;
                     }else if(data.name == 'DEPART'){
                         tailleDepart = taille;
-                    }else if(data.name == 'Poche noire 7'){
+                    }
+                    else if(data.name == 'Poche noire 7'){
                         taillePoche7 = taille;
                     }else if(data.name == 'Poche noire 8'){
                         taillePoche8 = taille;
@@ -100,11 +109,8 @@
                         taillePoche11 = taille;
                     }
 
-                    
-
                     data.features.forEach(feature => {
 
-                    
                         let coords = feature.geometry.coordinates;
                         let name = feature.properties.Name || feature.properties.id;
                         let description = feature.properties.description || "Aucune";
