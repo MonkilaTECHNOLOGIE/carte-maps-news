@@ -14,13 +14,13 @@
         let layers = {};
         let distanceLabels = [];
 
-        let tailleDepart;
-        let tailleBranche;
-        let tailleCabine;
-        let taillePoche7;
-        let taillePoche8;
-        let taillePoche9;
-        let taillePoche11;
+        let tailleDepart = 0;
+        let tailleBranche = 0;
+        let tailleCabine = 0;
+        let taillePoche7 = 0;
+        let taillePoche8 = 0;
+        let taillePoche9 = 0;
+        let taillePoche11 = 0;
         
 
         function initMap() {
@@ -65,13 +65,16 @@
                     <div id="layerControls"></div>
                     <div id="layerControls"></div>
                     <h3>La taille</h3>
-                    <p> DEPART : ${tailleDepart} Poteaux</p>
-                    <p> BRANCHE : ${tailleBranche} Poteaux</p>
-                    <p> CABINE : ${tailleCabine} Poteaux</p>
-                    <p> POCHE NOIRE 7 : ${taillePoche7} Poteaux</p>
-                    <p> POCHE NOIRE 8 : ${taillePoche8} Poteaux</p>
-                    <p> POCHE NOIRE 9 : ${taillePoche9} Poteaux</p>
-                    <p> POCHE NOIRE 11 : ${taillePoche11} Poteaux</p>
+
+                   <div id="taillesContainer">
+    <p> DEPART : 0 Poteaux</p>
+    <p> BRANCHE : 0 Poteaux</p>
+    <p> CABINE : 0 Poteaux</p>
+    <p> POCHE NOIRE 7 : 0 Poteaux</p>
+    <p> POCHE NOIRE 8 : 0 Poteaux</p>
+    <p> POCHE NOIRE 9 : 0 Poteaux</p>
+    <p> POCHE NOIRE 11 : 0 Poteaux</p>
+</div>
                 </div>
             `;
             document.body.appendChild(sidebar);
@@ -92,22 +95,23 @@
 
                     let taille = data.features.length;
 
-                    if(data.name == 'BRANCHE'){
-                        tailleBranche = taille;
-                    }else if(data.name == 'Cabine'){
-                        tailleCabine = taille;
-                    }else if(data.name == 'DEPART'){
-                        tailleDepart = taille;
+                    if (label == "Branche") {
+                        tailleBranche += taille;
+                    } else if (label == "Cabine") {
+                        tailleCabine += taille;
+                    } else if (label == "Départ") {
+                        tailleDepart += taille;
+                    } else if (label == "Poche noire 7") {
+                        taillePoche7 += taille;
+                    } else if (label == "Poche noire 8") {
+                        taillePoche8 += taille;
+                    } else if (label == "Poche noire 9") {
+                        taillePoche9 += taille;
+                    } else if (label == "Poche noire 11") {
+                        taillePoche11 += taille;
                     }
-                    else if(data.name == 'Poche noire 7'){
-                        taillePoche7 = taille;
-                    }else if(data.name == 'Poche noire 8'){
-                        taillePoche8 = taille;
-                    }else if(data.name == 'Poche noire 9'){
-                        taillePoche9 = taille;
-                    }else if(data.name == 'Poche noire 11'){
-                        taillePoche11 = taille;
-                    }
+
+                    updateTailleDisplay();
 
                     data.features.forEach(feature => {
 
@@ -312,6 +316,18 @@
             const wgs84 = proj4('WGS84');
             const [lng, lat] = proj4(utmProj, wgs84, [easting, northing]);
             return { lat, lng };
+        }
+        
+        function updateTailleDisplay() {
+            document.getElementById("taillesContainer").innerHTML = `
+                <p> DEPART : ${tailleDepart} Poteaux</p>
+                <p> BRANCHE : ${tailleBranche} Poteaux</p>
+                <p> CABINE : ${tailleCabine} Poteaux</p>
+                <p> POCHE NOIRE 7 : ${taillePoche7} Poteaux</p>
+                <p> POCHE NOIRE 8 : ${taillePoche8} Poteaux</p>
+                <p> POCHE NOIRE 9 : ${taillePoche9} Poteaux</p>
+                <p> POCHE NOIRE 11 : ${taillePoche11} Poteaux</p>
+            `;
         }
         
 
