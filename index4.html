@@ -337,6 +337,8 @@
 
                     //console.log(`Nom: ${data.name} | Taille: ${taille}`)
 
+
+
                     if (path.length > 1) {
                         for (let i = 0; i < path.length - 1; i++) {
                             let distance = google.maps.geometry.spherical.computeDistanceBetween(
@@ -391,84 +393,22 @@
                 });
         }
 
-        // Nouvelle structure pour gérer les couches par poche noire et sous-éléments
-        const pocheNoireGroups = {
-            'Poche Noire 7': [],
-            'Poche Noire 8': [],
-            'Poche Noire 9': [],
-            'Poche Noire 11': []
-        };
-        const coucheTypes = ['Branche', 'Cabine', 'Départ', 'Poche Noire 7', 'Poche Noire 8', 'Poche Noire 9', 'Poche Noire 11'];
-
         function addLayerControl(label) {
             let container = document.getElementById("layerControls");
-            // Regroupement par poche noire
-            if (label.startsWith('Poche Noire')) {
-                // Ajoute à la liste du groupe
-                if (!pocheNoireGroups[label]) pocheNoireGroups[label] = [];
-                pocheNoireGroups[label].push(label);
-                // Si le bloc n'existe pas, on le crée
-                let groupDiv = document.getElementById('group_' + label.replace(/\s/g, ''));
-                if (!groupDiv) {
-                    groupDiv = document.createElement('div');
-                    groupDiv.id = 'group_' + label.replace(/\s/g, '');
-                    groupDiv.style.marginBottom = '12px';
-                    groupDiv.innerHTML = `<div style="font-weight:600;color:#007bff;margin-bottom:4px;">${label}</div><div class="poche-group-inner"></div>`;
-                    container.appendChild(groupDiv);
-                }
-                let inner = groupDiv.querySelector('.poche-group-inner');
-                // Ajoute le checkbox pour la poche noire globale
-                if (!groupDiv.querySelector('.poche-global')) {
-                    let pocheCb = document.createElement('input');
-                    pocheCb.type = 'checkbox';
-                    pocheCb.checked = true;
-                    pocheCb.className = 'poche-global';
-                    pocheCb.id = `layer_${label.replace(/\s/g, '')}_global`;
-                    pocheCb.addEventListener('change', function () {
-                        // Active/désactive tous les sous-checkbox
-                        inner.querySelectorAll('input[type=checkbox]').forEach(cb => { cb.checked = this.checked; cb.dispatchEvent(new Event('change')); });
-                    });
-                    let pocheLabel = document.createElement('label');
-                    pocheLabel.htmlFor = pocheCb.id;
-                    pocheLabel.textContent = 'Tout afficher';
-                    groupDiv.insertBefore(pocheCb, inner);
-                    groupDiv.insertBefore(pocheLabel, inner);
-                    groupDiv.insertBefore(document.createElement('br'), inner);
-                }
-                // Ajoute le sous-checkbox pour ce type précis
-                let cb = document.createElement('input');
-                cb.type = 'checkbox';
-                cb.checked = true;
-                cb.id = `layer_${label.replace(/\s/g, '')}`;
-                cb.addEventListener('change', function () {
-                    toggleLayer(label, this.checked);
-                });
-                let labelElement = document.createElement('label');
-                labelElement.htmlFor = cb.id;
-                labelElement.textContent = 'Poteaux';
-                inner.appendChild(cb);
-                inner.appendChild(labelElement);
-                inner.appendChild(document.createElement('br'));
-                // Ajoute les sous-checkbox pour Cabine, Départ, Branche associés à cette poche noire
-                ['Cabine', 'Départ', 'Branche'].forEach(type => {
-                    let subLabel = `${type} (${label})`;
-                    let subCb = document.createElement('input');
-                    subCb.type = 'checkbox';
-                    subCb.checked = true;
-                    subCb.id = `layer_${type.replace(/\s/g, '')}_${label.replace(/\s/g, '')}`;
-                    subCb.addEventListener('change', function () {
-                        toggleLayer(subLabel, this.checked);
-                    });
-                    let subLabelElement = document.createElement('label');
-                    subLabelElement.htmlFor = subCb.id;
-                    subLabelElement.textContent = type;
-                    inner.appendChild(subCb);
-                    inner.appendChild(subLabelElement);
-                    inner.appendChild(document.createElement('br'));
-                });
-                inner.appendChild(document.createElement('br'));
-            }
-            // Ne rien afficher pour les couches hors poche noire
+            let checkbox = document.createElement("input");
+            checkbox.type = "checkbox";
+            checkbox.checked = true;
+            checkbox.id = `layer_${label}`;
+            checkbox.addEventListener("change", function () {
+                toggleLayer(label, this.checked);
+            });
+            let labelElement = document.createElement("label");
+            labelElement.htmlFor = `layer_${label}`;
+            labelElement.textContent = label;
+            container.appendChild(checkbox);
+            container.appendChild(labelElement);
+            container.appendChild(document.createElement("br"));
+            container.appendChild(document.createElement("br"));
         }
 
         function toggleLayer(label, show) {
@@ -844,7 +784,7 @@
     </div>
 
     <div id="mapTab" class="tab-content active" style="display:block;">
-        <div id="map" style="width: 100%; height: 550px; "></div>
+        <div id="map" style="width: 100%; height: 600px;"></div>
     </div>
 
     <div id="statsTab" class="tab-content" style="display:none;padding:12px;">
