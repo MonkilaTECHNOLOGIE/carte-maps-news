@@ -9,7 +9,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <script>
-        // Fonctions globales pour la gestion du bouton sidebar
+
         function showSidebarBtn(show) {
             var btn = document.getElementById('openSidebarBtn');
             if (btn) btn.style.display = show ? 'flex' : 'none';
@@ -21,11 +21,62 @@
             // Vérifie quel onglet est actif
             var activeTab = document.querySelector('.tab-btn.active');
             if (activeTab && activeTab.dataset.tab === 'mapTab') {
-                openBtn.style.display = 'flex'; // bouton visible uniquement dans Carte
+                openBtn.style.display = 'flex';
             } else {
-                openBtn.style.display = 'none'; // bouton masqué ailleurs
+                openBtn.style.display = 'none';
             }
         }
+
+        function exportChart() {
+            const url = window.statsChart.toBase64Image();
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = 'statistiques_poteaux.png';
+            link.click();
+        }
+
+        function exportStats() {
+            const rows = [
+                ["Type", "Nombre de poteaux"],
+                ["DEPART", tailleDepart],
+                ["BRANCHE", tailleBranche],
+                ["CABINE", tailleCabine],
+                ["PN7", taillePoche7],
+                ["PN8", taillePoche8],
+                ["PN9", taillePoche9],
+                ["PN11", taillePoche11]
+            ];
+            let csvContent = "data:text/csv;charset=utf-8," + rows.map(e => e.join(",")).join("\n");
+            const link = document.createElement("a");
+            link.href = encodeURI(csvContent);
+            link.download = "statistiques_poteaux.csv";
+            link.click();
+        }
+
+        function updateKPI() {
+            const values = [tailleDepart, tailleBranche, tailleCabine, taillePoche7, taillePoche8, taillePoche9, taillePoche11];
+            const labels = ['DEPART', 'BRANCHE', 'CABINE', 'PN7', 'PN8', 'PN9', 'PN11'];
+            const total = values.reduce((a, b) => a + b, 0);
+            const maxIndex = values.indexOf(Math.max(...values));
+            const minIndex = values.indexOf(Math.min(...values));
+
+            document.getElementById('totalPoteaux').textContent = total;
+            document.getElementById('typeMax').textContent = `${labels[maxIndex]} (${values[maxIndex]})`;
+            document.getElementById('typeMin').textContent = `${labels[minIndex]} (${values[minIndex]})`;
+        }
+
+        /*function updateStatsTable() {
+            const values = [tailleDepart, tailleBranche, tailleCabine, taillePoche7, taillePoche8, taillePoche9, taillePoche11];
+            const labels = ['DEPART', 'BRANCHE', 'CABINE', 'PN7', 'PN8', 'PN9', 'PN11'];
+            const total = values.reduce((a, b) => a + b, 0);
+            const tbody = document.getElementById('statsTableBody');
+            tbody.innerHTML = '';
+            labels.forEach((lbl, i) => {
+                const percent = ((values[i] / total) * 100).toFixed(1);
+                tbody.innerHTML += `<tr><td>${lbl}</td><td>${values[i]}</td><td>${percent}%</td></tr>`;
+            });
+        }*/
+
 
         document.addEventListener('DOMContentLoaded', function () {
             // Gestion des onglets
@@ -55,6 +106,8 @@
 
             function renderChart() {
                 const ctxEl = document.getElementById('statsChart');
+
+
                 if (!ctxEl) return;
                 const ctx = ctxEl.getContext('2d');
 
@@ -72,11 +125,27 @@
                 window.statsChart = new Chart(ctx, {
                     type: 'bar',
                     data: {
-                        labels: ['DEPART', 'BRANCHE', 'CABINE', 'PN7', 'PN8', 'PN9', 'PN11'],
+                        labels: ['DEPART', 'BRANCHE', 'CABINE', 'POCHE NOIRE 7', 'POCHE NOIRE 8', 'POCHE NOIRE 9', 'POCHE NOIRE 11'],
                         datasets: [{
                             label: 'Nombre de poteaux',
                             data: dataArray,
-                            backgroundColor: ['green', 'red', 'blue', 'olive', 'maroon', 'aqua', 'fuchsia']
+                            backgroundColor: [
+                                '#00FFFF',
+                                '#FF007F',
+                                '#7C00FF',
+                                '#00FF9C',
+                                '#FF4500',
+                                '#00BFFF',
+                                '#FFD700',
+                            ],
+                            borderWidth: 2,
+                            borderRadius: 8,
+                            hoverBackgroundColor: [
+                                '#33FFFF', '#FF33A6', '#A24BFF',
+                                '#33FFB8', '#FF7043', '#33CFFF', '#FFE34C'
+                            ],
+                            hoverBorderWidth: 2,
+
                         }]
                     },
                     options: {
@@ -95,41 +164,87 @@
                 if (src && dst) dst.innerHTML = src.innerHTML;
 
                 renderChart();
+                updateKPI();
+                //updateStatsTable();
             };
             // Appel initial
             updateSidebarBtnVisibility();
             // Impression personnalisée (ajout du listener après chargement DOM)
             setTimeout(function () {
-                var printBtn = document.getElementById('printBtn');
-                if (printBtn) {
-                    printBtn.onclick = function () {
-                        var printMap = document.getElementById('printMap').checked;
-                        var printStats = document.getElementById('printStats').checked;
-                        var mapTab = document.getElementById('mapTab');
-                        var statsTab = document.getElementById('statsTab');
-                        var tabs = document.querySelector('.tabs');
-                        var sidebar = document.getElementById('sidebar');
-                        var overlay = document.getElementById('sidebarOverlay');
-                        var mapTabDisplay = mapTab.style.display;
-                        var statsTabDisplay = statsTab.style.display;
-                        var tabsDisplay = tabs.style.display;
-                        var sidebarDisplay = sidebar ? sidebar.style.display : '';
-                        var overlayDisplay = overlay ? overlay.style.display : '';
-                        mapTab.style.display = printMap ? 'block' : 'none';
-                        statsTab.style.display = printStats ? 'block' : 'none';
-                        tabs.style.display = 'none';
-                        if (sidebar) sidebar.style.display = 'none';
-                        if (overlay) overlay.style.display = 'none';
-                        setTimeout(() => {
-                            window.print();
-                            mapTab.style.display = mapTabDisplay;
-                            statsTab.style.display = statsTabDisplay;
-                            tabs.style.display = tabsDisplay;
-                            if (sidebar) sidebar.style.display = sidebarDisplay;
-                            if (overlay) overlay.style.display = overlayDisplay;
-                        }, 200);
-                    }
-                }
+                const printBtn = document.getElementById('printBtn');
+                if (!printBtn) return;
+
+                printBtn.onclick = function () {
+                    const printMap = document.getElementById('printMap').checked;
+                    const printStats = document.getElementById('printStats').checked;
+
+                    const mapTab = document.getElementById('mapTab');
+                    const statsTab = document.getElementById('statsTab');
+                    const tabs = document.querySelector('.tabs');
+                    const sidebar = document.getElementById('sidebar');
+                    const overlay = document.getElementById('sidebarOverlay');
+
+                    // Sauvegarde des affichages initiaux
+                    const mapTabDisplay = mapTab.style.display;
+                    const statsTabDisplay = statsTab.style.display;
+                    const tabsDisplay = tabs.style.display;
+                    const sidebarDisplay = sidebar ? sidebar.style.display : '';
+                    const overlayDisplay = overlay ? overlay.style.display : '';
+
+                    // Création de l'en-tête d'impression
+                    const header = document.createElement('div');
+                    header.id = 'printHeader';
+                    header.style.textAlign = 'center';
+                    header.style.marginBottom = '20px';
+                    header.innerHTML = `
+      <h2 style="font-weight:bold;">THESE DE DOCTORAT</h2> 
+      <hr>
+      <p style="margin:4px 0;">OPTIMISATION DE LA MISE À LA TERRE EFFECTIVE DU
+            NEUTRE BASÉE SUR LE SYSTÈME D’INFORMATION
+            GÉOGRAPHIQUE POUR LA GESTION INTELLIGENTE DU
+            RÉSEAU MOYENNE TENSION DE LA SOCIÉTÉ NATIONALE
+            D’ÉLECTRICITÉ / KINSHASA - OUEST </p>
+      <p style="margin:4px 0;"><strong>Auteur :</strong> Barthelemy MONKILA NKIWA</p>
+      <p style="margin:4px 0;"><strong>Contact :</strong> +243 815 992 630 | +243 898 843 147 / bmonkila@isptkin.ac.cd | mnkiwa@gmail.com</p>
+      <p style="margin:4px 0;"><strong>Date :</strong> ${new Date().toLocaleDateString()}</p>
+      <hr style="margin-top:12px;">
+    `;
+                    document.body.insertBefore(header, document.body.firstChild);
+
+
+                    const kpiContainer = document.getElementById('kpiContainer');
+                    const printOptionsContainer = document.getElementById('printOptionsContainer');
+                    const exportBtn = document.getElementById('exportBtn');
+
+                    // Affiche uniquement les éléments cochés
+                    mapTab.style.display = printMap ? 'block' : 'none';
+                    statsTab.style.display = printStats ? 'block' : 'none';
+                    /* kpiContainer.style.display = 'none';
+                    printOptionsContainer.style.display = 'none';
+                    exportBtn.style.display =  'none';*/
+
+                    tabs.style.display = 'none';
+                    if (sidebar) sidebar.style.display = 'none';
+                    if (overlay) overlay.style.display = 'none';
+
+                    
+
+                    // Lancement de l'impression
+                    setTimeout(() => {
+                        window.print();
+
+                        // Restaure l'affichage initial après impression
+                        mapTab.style.display = mapTabDisplay;
+                        statsTab.style.display = statsTabDisplay;
+                        tabs.style.display = tabsDisplay;
+                        if (sidebar) sidebar.style.display = sidebarDisplay;
+                        if (overlay) overlay.style.display = overlayDisplay;
+
+                        // Supprime l'en-tête d'impression
+                        const headerEl = document.getElementById('printHeader');
+                        if (headerEl) headerEl.remove();
+                    }, 300);
+                };
             }, 500);
         });
     </script>
@@ -826,6 +941,42 @@
                 padding: 12px 4px 4px 4px;
             }
         }
+
+        .kpi-container {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        .kpi-card {
+            background: #fff;
+            padding: 16px 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+            flex: 1;
+            text-align: center;
+        }
+
+        .stats-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 16px;
+        }
+
+        .stats-table th,
+        .stats-table td {
+            border-bottom: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+
+        @media print{
+            #kpiContainer, #exportBtn,  #printOptionsContainer{
+                display: none;
+            }
+        }
+        
     </style>
 </head>
 
@@ -855,19 +1006,70 @@
             <hr>
             <div>Total: <span id="totalStats"></span></div>
         </div>
-        <canvas id="statsChart"></canvas>
+
+
+
+        <div class="kpi-container" id="kpiContainer">
+            <div class="kpi-card">
+                <h4>Total Poteaux</h4>
+                <p id="totalPoteaux"></p>
+            </div>
+            <div class="kpi-card">
+                <h4>Type le plus fréquent</h4>
+                <p id="typeMax"></p>
+            </div>
+            <div class="kpi-card">
+                <h4>Type le moins fréquent</h4>
+                <p id="typeMin"></p>
+            </div>
+        </div>
+
+        <!-- <select id="chartTypeSelect">
+            <option value="bar">Barres</option>
+            <option value="pie">Camembert</option>
+            <option value="radar">Radar</option>
+        </select> -->
+
+        <div id="exportBtn">
+            <button
+            style="padding:12px 24px;border-radius:8px;border:none;background:linear-gradient(90deg,#007bff 60%,#0056b3 100%);color:white;cursor:pointer;font-size:1.1rem;font-weight:600;box-shadow:0 2px 8px rgba(0,0,0,0.10);transition:background 0.2s,box-shadow 0.2s;margin-top:12px;"
+            onclick="exportStats()">
+            Exporter CSV</button>
+        <button
+            style="padding:12px 24px;border-radius:8px;border:none;background:linear-gradient(90deg,#007bff 60%,#0056b3 100%);color:white;cursor:pointer;font-size:1.1rem;font-weight:600;box-shadow:0 2px 8px rgba(0,0,0,0.10);transition:background 0.2s,box-shadow 0.2s;margin-top:12px;"
+            onclick="exportChart()">
+            Exporter PDF</button>
+        </div>
+
+        
+
+
+
+        <canvas id="statsChart" style="margin-top: 10px;"></canvas>
+
+        <!-- <table class="stats-table">
+            <thead>
+                <tr>
+                    <th>Type</th>
+                    <th>Nombre de poteaux</th>
+                    <th>Pourcentage</th>
+                </tr>
+            </thead>
+            <tbody id="statsTableBody"></tbody>
+        </table> -->
+
     </div>
 
     <div id="printTab" class="tab-content" style="display:none;padding:12px;">
         <div
-            style="background:#fff;border-radius:14px;box-shadow:0 2px 12px rgba(0,0,0,0.07);padding:18px 20px 10px 20px;margin-bottom:18px;">
+            style="background:#fff;border-radius:14px;box-shadow:0 2px 12px rgba(0,0,0,0.07);padding:18px 20px 10px 20px;margin-bottom:18px;" id="printOptionsContainer">
             <h3 style="color:#007bff;margin-top:0;">Impression personnalisée</h3>
             <p style="font-size:1.08rem;">Choisissez les éléments à inclure dans l'impression :</p>
             <label style="margin-bottom:8px;"><input type="checkbox" id="printMap" checked> Inclure la carte</label><br>
             <label style="margin-bottom:8px;"><input type="checkbox" id="printStats" checked> Inclure les
                 statistiques</label><br>
             <button id="printBtn"
-                style="padding:12px 24px;border-radius:8px;border:none;background:linear-gradient(90deg,#007bff 60%,#0056b3 100%);color:white;cursor:pointer;font-size:1.1rem;font-weight:600;box-shadow:0 2px 8px rgba(0,0,0,0.10);transition:background 0.2s,box-shadow 0.2s;margin-top:12px;">🖨️
+                style="padding:12px 24px;border-radius:8px;border:none;background:linear-gradient(90deg,#007bff 60%,#0056b3 100%);color:white;cursor:pointer;font-size:1.1rem;font-weight:600;box-shadow:0 2px 8px rgba(0,0,0,0.10);transition:background 0.2s,box-shadow 0.2s;margin-top:12px;">
                 Imprimer</button>
             <p style="font-size:0.98rem;color:#888;margin-top:10px;">Astuce : utilisez les cases à cocher pour
                 personnaliser votre impression.</p>
