@@ -1,0 +1,62 @@
+[
+    {
+    "Postes/Sous-Stations Sources": "MITENDI",
+    "Feeders": "PN8",
+    "Cabines": {
+      "Nom": "PPRO 8-1",
+      "Puissance": "3x100kVA",
+      "Coordonnees": {
+        "Longitude": 15.20829,
+        "Latitude": -4.51206
+      }
+    }
+  },
+  {
+    "Postes/Sous-Stations Sources": "MITENDI",
+    "Feeders": "PN8",
+    "Cabines": {
+      "Nom": "PPRO 8-2",
+      "Puissance": "75kVA",
+      "Coordonnees": {
+        "Longitude": 15.22576,
+        "Latitude": -4.50771
+      }
+    }
+  },
+  {
+    "Postes/Sous-Stations Sources": "MITENDI",
+    "Feeders": "PN8",
+    "Cabines": {
+      "Nom": "PPRO 8-3",
+      "Puissance": "75kVA",
+      "Coordonnees": {
+        "Longitude": 15.21082,
+        "Latitude": -4.50671
+      }
+    }
+  },
+  {
+    "Postes/Sous-Stations Sources": "MITENDI",
+    "Feeders": "PN8",
+    "Cabines": {
+      "Nom": "PPRO 8-4",
+      "Puissance": "3x100kVA",
+      "Coordonnees": {
+        "Longitude": 15.20807,
+        "Latitude": -4.50751
+      }
+    }
+  },
+  {
+    "Postes/Sous-Stations Sources": "MITENDI",
+    "Feeders": "PN8",
+    "Cabines": {
+      "Nom": "PPRO 8-5",
+      "Puissance": "75kVA",
+      "Coordonnees": {
+        "Longitude": 15.20799,
+        "Latitude": -4.50812
+      }
+    }
+  }
+]

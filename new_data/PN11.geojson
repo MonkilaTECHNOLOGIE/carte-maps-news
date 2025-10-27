@@ -1,0 +1,62 @@
+[
+    {
+    "Postes/Sous-Stations Sources": "MITENDI",
+    "Feeders": "PN11",
+    "Cabines": {
+      "Nom": "PPRO 11-1",
+      "Puissance": "3x100kVA",
+      "Coordonnees": {
+        "Longitude": 15.24372,
+        "Latitude": -4.47895
+      }
+    }
+  },
+  {
+    "Postes/Sous-Stations Sources": "MITENDI",
+    "Feeders": "PN11",
+    "Cabines": {
+      "Nom": "PPRO 11-2",
+      "Puissance": "75kVA",
+      "Coordonnees": {
+        "Longitude": 15.24233,
+        "Latitude": -4.47818
+      }
+    }
+  },
+  {
+    "Postes/Sous-Stations Sources": "MITENDI",
+    "Feeders": "PN11",
+    "Cabines": {
+      "Nom": "PPRO 11-3",
+      "Puissance": "75kVA",
+      "Coordonnees": {
+        "Longitude": 15.24085,
+        "Latitude": -4.47747
+      }
+    }
+  },
+  {
+    "Postes/Sous-Stations Sources": "MITENDI",
+    "Feeders": "PN11",
+    "Cabines": {
+      "Nom": "PPRO 11-4",
+      "Puissance": "75kVA",
+      "Coordonnees": {
+        "Longitude": 15.24392,
+        "Latitude": -4.47683
+      }
+    }
+  },
+  {
+    "Postes/Sous-Stations Sources": "MITENDI",
+    "Feeders": "PN11",
+    "Cabines": {
+      "Nom": "PPRO 11-5",
+      "Puissance": "100kVA",
+      "Coordonnees": {
+        "Longitude": 15.24443,
+        "Latitude": -4.47942
+      }
+    }
+  }
+]

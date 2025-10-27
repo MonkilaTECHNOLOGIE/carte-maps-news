@@ -38,6 +38,9 @@
         function exportStats() {
             const rows = [
                 ["Type", "Nombre de poteaux"],
+                ["DEPART", tailleDepart],
+                ["BRANCHE", tailleBranche],
+                ["CABINE", tailleCabine],
                 ["PN7", taillePoche7],
                 ["PN8", taillePoche8],
                 ["PN9", taillePoche9],
@@ -51,8 +54,8 @@
         }
 
         function updateKPI() {
-            const values = [taillePoche7, taillePoche8, taillePoche9, taillePoche11];
-            const labels = ['PN7', 'PN8', 'PN9', 'PN11'];
+            const values = [tailleDepart, tailleBranche, tailleCabine, taillePoche7, taillePoche8, taillePoche9, taillePoche11];
+            const labels = ['DEPART', 'BRANCHE', 'CABINE', 'PN7', 'PN8', 'PN9', 'PN11'];
             const total = values.reduce((a, b) => a + b, 0);
             const maxIndex = values.indexOf(Math.max(...values));
             const minIndex = values.indexOf(Math.min(...values));
@@ -109,6 +112,7 @@
                 const ctx = ctxEl.getContext('2d');
 
                 const dataArray = [
+                    tailleDepart, tailleBranche, tailleCabine,
                     taillePoche7, taillePoche8, taillePoche9, taillePoche11
                 ];
 
@@ -121,7 +125,7 @@
                 window.statsChart = new Chart(ctx, {
                     type: 'bar',
                     data: {
-                        labels: ['POCHE NOIRE 7', 'POCHE NOIRE 8', 'POCHE NOIRE 9', 'POCHE NOIRE 11'],
+                        labels: ['DEPART', 'BRANCHE', 'CABINE', 'POCHE NOIRE 7', 'POCHE NOIRE 8', 'POCHE NOIRE 9', 'POCHE NOIRE 11'],
                         datasets: [{
                             label: 'Nombre de poteaux',
                             data: dataArray,
@@ -275,14 +279,14 @@
             });
 
 
-            //loadGeoJSON("data/BRANCHE.geojson", "red", "Branche");
-            //loadGeoJSON("data/CABINE.geojson", "blue", "Cabine");
-            //loadGeoJSON("data/DEPART.geojson", "green", "Départ");
+            loadGeoJSON("data/BRANCHE.geojson", "red", "Branche");
+            loadGeoJSON("data/CABINE.geojson", "blue", "Cabine");
+            loadGeoJSON("data/DEPART.geojson", "green", "Départ");
             //loadGeoJSON("data/POCHE.geojson", "yellow", "Poche Noire");
-            loadGeoJSON("new_data/PN7.geojson", "olive", "Poche Noire 7");
-            loadGeoJSON("new_data/PN8.geojson", "maroon", "Poche Noire 8");
-            loadGeoJSON("new_data/PN9.geojson", "aqua", "Poche Noire 9");
-            loadGeoJSON("new_data/PN11.geojson", "fuchsia", "Poche Noire 11");
+            loadGeoJSON("data/PN7.geojson", "olive", "Poche Noire 7");
+            loadGeoJSON("data/PN8.geojson", "maroon", "Poche Noire 8");
+            loadGeoJSON("data/PN9.geojson", "aqua", "Poche Noire 9");
+            loadGeoJSON("data/PN11.geojson", "fuchsia", "Poche Noire 11");
             addSidebar();
         }
 
@@ -296,21 +300,23 @@
                     <div id="layerControls"></div>
                     <div id="layerControls"></div>
                     <h3>Légende</h3>
-                    <p><span style="color: red;">⬤</span> POCHE NOIRE 7</p>
-                    <p><span style="color: yellow;">⬤</span> POCHE NOIRE 8</p>
-                    <p><span style="color: green;">⬤</span> POCHE NOIRE 9</p>
-                    <p><span style="color: blue;">⬤</span> POCHE NOIRE 11</p>
+                    <p><span style="color: red;">⬤</span> PAF (Poteau à angle Fort)</p>
+                    <p><span style="color: blue;">⬤</span> Poteau</p>
+                    <p><span style="color: green;">⬤</span> PAL (Poteau d'alignement)</p>
+                    <p><span style="color: yellow;">⬤</span> PAM (Poteau à angle Moyen)</p>
                     <div id="layerControls"></div>
                     <div id="layerControls"></div>
                     <h3>La taille</h3>
                    <div id="taillesContainer">
+                        <p> DEPART : 0 Poteaux</p>
+                        <p> BRANCHE : 0 Poteaux</p>
+                        <p> CABINE : 0 Poteaux</p>
                         <p> POCHE NOIRE 7 : 0 Poteaux</p>
                         <p> POCHE NOIRE 8 : 0 Poteaux</p>
                         <p> POCHE NOIRE 9 : 0 Poteaux</p>
                         <p> POCHE NOIRE 11 : 0 Poteaux</p>
                    </div>
                    <div id="layerControls"></div>
-                   <div id="layerControls"></div><div id="layerControls"></div>
                 </div>
             `;
             document.body.appendChild(sidebar);
@@ -354,7 +360,7 @@
                     let group = [];
                     let newLabel = "AUTRES";
 
-                    let taille = data.length;
+                    let taille = data.features.length;
 
                     if (label == "Branche") {
                         tailleBranche += taille;
@@ -374,29 +380,19 @@
 
                     updateTailleDisplay();
 
-                    data.forEach(Cabines => {
+                    data.features.forEach(feature => {
 
-                        //console.log(Cabines.Cabines);
-
-                        //let coords = feature.geometry.coordinates;
-                        let long = Cabines.Cabines.Coordonnees.Longitude;
-                        let lat = Cabines.Cabines.Coordonnees.Latitude;
-
-                        //let name = feature.properties.Name || feature.properties.id;
-                        let name = Cabines.Cabines.Nom;
-                        //let description = feature.properties.description || "Aucune";
-                        //let obersvation = feature.properties.observations || "Aucune";
-                        let description = Cabines.Cabines.Puissance || "Aucune";
-                        let feeders = Cabines.Feeders;
-
-
+                        let coords = feature.geometry.coordinates;
+                        let name = feature.properties.Name || feature.properties.id;
+                        let description = feature.properties.description || "Aucune";
+                        let obersvation = feature.properties.observations || "Aucune";
                         //let poteauType = feature.properties.type_poteau || "Inconnu";
-                        //let poteauType = feature.type_poteau || feature.properties.type || "Inconnu";
+                        let poteauType = feature.type_poteau || feature.properties.type || "Inconnu";
                         let newColor = "";
 
 
 
-                        /*if (poteauType == "PAF") {
+                        if (poteauType == "PAF") {
                             newColor = "red";
                             newLabel = "PAF";
                         } else if (poteauType == "PAM") {
@@ -410,34 +406,20 @@
                         } else {
                             newLabel = feature.properties.type;
                             newColor = "blue";
-                        }*/
-
-                        if(feeders.includes("PN7")){
-                            newColor = "red";
-                            //newLabel = "PAF";
-                        } else if(feeders.includes("PN8")){
-                            newColor = "yellow";
-                            //newLabel = "PAM";
-                        } else if(feeders.includes("PN9")){
-                            newColor = "green";
-                            //newLabel = "PAL";
-                        } else {
-                            newColor = "blue";
                         }
 
                         //let convertedCoords = utmToLatLng(coords[0], coords[1], 33, true);
 
                         let position;
-                        position = { lat: lat, lng: long };
-
-                        console.log(position);
-                        
-                        /* if (isUTM(coords)) {
-                            position = utmToLatLngWithProj4(long, lat, 33);
+                        if (isUTM(coords)) {
+                            position = utmToLatLngWithProj4(coords[0], coords[1], 33);
                         } else {
-                            position = { lat: lat, lng: long };
-                            console.lo
-                        }*/
+                            position = { lat: coords[1], lng: coords[0] };
+                        }
+
+                        //console.log(position);
+
+
 
                         let marker = new google.maps.Marker({
                             position: position,
@@ -451,7 +433,7 @@
                         });
 
                         let infoWindow = new google.maps.InfoWindow({
-                            content: `<b>Nom : ${name}</b><br><b>Description :</b> ${description}<br><b>Feeders :</b> ${feeders}<br><b>Obersvation:</b> ${description}`
+                            content: `<b>Nom : ${name}</b><br><b>Description :</b> ${description}<br><b>Type Poteau :</b> ${poteauType}<br><b>Obersvation:</b> ${description}`
                         });
 
                         marker.addListener("mouseover", () => {
@@ -465,7 +447,7 @@
 
                         markers.push(marker);
                         group.push(marker);
-                        path.push({ lat: lat, lng: long });
+                        path.push({ lat: coords[1], lng: coords[0] });
                     });
 
                     //console.log(`Nom: ${data.name} | Taille: ${taille}`)
@@ -531,7 +513,7 @@
             'Poche Noire 9': [],
             'Poche Noire 11': []
         };
-        const coucheTypes = ['Poche Noire 7', 'Poche Noire 8', 'Poche Noire 9', 'Poche Noire 11'];
+        const coucheTypes = ['Branche', 'Cabine', 'Départ', 'Poche Noire 7', 'Poche Noire 8', 'Poche Noire 9', 'Poche Noire 11'];
 
         function addLayerControl(label) {
             let container = document.getElementById("layerControls");
@@ -583,7 +565,7 @@
                 inner.appendChild(labelElement);
                 inner.appendChild(document.createElement('br'));
                 // Ajoute les sous-checkbox pour Cabine, Départ, Branche associés à cette poche noire
-                /* ['Cabine'].forEach(type => {
+                ['Cabine', 'Départ', 'Branche'].forEach(type => {
                     let subLabel = `${type} (${label})`;
                     let subCb = document.createElement('input');
                     subCb.type = 'checkbox';
@@ -598,7 +580,7 @@
                     inner.appendChild(subCb);
                     inner.appendChild(subLabelElement);
                     inner.appendChild(document.createElement('br'));
-                }); */
+                });
                 inner.appendChild(document.createElement('br'));
             }
             // Ne rien afficher pour les couches hors poche noire
@@ -669,6 +651,9 @@
             var statas = document.getElementById('totalStats');
             if (!container) return;
             container.innerHTML = `
+                <p> DEPART : ${typeof tailleDepart !== 'undefined' ? tailleDepart : 0} Poteaux</p>
+                <p> BRANCHE : ${typeof tailleBranche !== 'undefined' ? tailleBranche : 0} Poteaux</p>
+                <p> CABINE : ${typeof tailleCabine !== 'undefined' ? tailleCabine : 0} Poteaux</p>
                 <p> POCHE NOIRE 7 : ${typeof taillePoche7 !== 'undefined' ? taillePoche7 : 0} Poteaux</p>
                 <p> POCHE NOIRE 8 : ${typeof taillePoche8 !== 'undefined' ? taillePoche8 : 0} Poteaux</p>
                 <p> POCHE NOIRE 9 : ${typeof taillePoche9 !== 'undefined' ? taillePoche9 : 0} Poteaux</p>
@@ -676,7 +661,9 @@
             `;
 
             if (statas) {
-                let total = 
+                let total = (typeof tailleDepart !== 'undefined' ? tailleDepart : 0) +
+                    (typeof tailleBranche !== 'undefined' ? tailleBranche : 0) +
+                    (typeof tailleCabine !== 'undefined' ? tailleCabine : 0) +
                     (typeof taillePoche7 !== 'undefined' ? taillePoche7 : 0) +
                     (typeof taillePoche8 !== 'undefined' ? taillePoche8 : 0) +
                     (typeof taillePoche9 !== 'undefined' ? taillePoche9 : 0) +

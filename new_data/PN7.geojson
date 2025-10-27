@@ -1,0 +1,122 @@
+[
+    {
+    "Postes/Sous-Stations Sources": "MITENDI",
+    "Feeders": "PN7",
+    "Cabines": {
+      "Nom": "PPRO 7-2A",
+      "Puissance": "3x100kVA",
+      "Coordonnees": {
+        "Longitude": 15.22255,
+        "Latitude": -4.51108
+      }
+    }
+  },
+  {
+    "Postes/Sous-Stations Sources": "MITENDI",
+    "Feeders": "PN7",
+    "Cabines": {
+      "Nom": "PPRO 7-2B",
+      "Puissance": "75kVA",
+      "Coordonnees": {
+        "Longitude": 15.21694,
+        "Latitude": -4.51057
+      }
+    }
+  },
+  {
+    "Postes/Sous-Stations Sources": "MITENDI",
+    "Feeders": "PN7",
+    "Cabines": {
+      "Nom": "PPRO 7-3",
+      "Puissance": "75kVA",
+      "Coordonnees": {
+        "Longitude": 15.22501,
+        "Latitude": -4.51320
+      }
+    }
+  },
+  {
+    "Postes/Sous-Stations Sources": "MITENDI",
+    "Feeders": "PN7",
+    "Cabines": {
+      "Nom": "PPRO 7-4A",
+      "Puissance": "100kVA",
+      "Coordonnees": {
+        "Longitude": 15.22491,
+        "Latitude": -4.51495
+      }
+    }
+  },
+  {
+    "Postes/Sous-Stations Sources": "MITENDI",
+    "Feeders": "PN7",
+    "Cabines": {
+      "Nom": "PPRO 7-4B",
+      "Puissance": "75kVA",
+      "Coordonnees": {
+        "Longitude": 15.22531,
+        "Latitude": -4.51403
+      }
+    }
+  },
+  {
+    "Postes/Sous-Stations Sources": "MITENDI",
+    "Feeders": "PN7",
+    "Cabines": {
+      "Nom": "PPRO 7-6",
+      "Puissance": "75kVA",
+      "Coordonnees": {
+        "Longitude": 15.21599,
+        "Latitude": -4.51057
+      }
+    }
+  },
+  {
+    "Postes/Sous-Stations Sources": "MITENDI",
+    "Feeders": "PN7",
+    "Cabines": {
+      "Nom": "PPRO 7-7A",
+      "Puissance": "75kVA",
+      "Coordonnees": {
+        "Longitude": 15.22149,
+        "Latitude": -4.51025
+      }
+    }
+  },
+  {
+    "Postes/Sous-Stations Sources": "MITENDI",
+    "Feeders": "PN7",
+    "Cabines": {
+      "Nom": "PPRO 7-7B",
+      "Puissance": "50kVA",
+      "Coordonnees": {
+        "Longitude": 15.22149,
+        "Latitude": -4.51025
+      }
+    }
+  },
+  {
+    "Postes/Sous-Stations Sources": "MITENDI",
+    "Feeders": "PN7",
+    "Cabines": {
+      "Nom": "PPRO 7-7C",
+      "Puissance": "75kVA",
+      "Coordonnees": {
+        "Longitude": 15.21925,
+        "Latitude": -4.51037
+      }
+    }
+  },
+  {
+    "Postes/Sous-Stations Sources": "MITENDI",
+    "Feeders": "PN7",
+    "Cabines": {
+      "Nom": "PPRO 7-8",
+      "Puissance": "25kVA",
+      "Coordonnees": {
+        "Longitude": 15.22576,
+        "Latitude": -4.51220
+      }
+    }
+  }
+]
