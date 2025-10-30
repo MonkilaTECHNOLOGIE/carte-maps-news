@@ -31,13 +31,13 @@
             const url = window.statsChart.toBase64Image();
             const link = document.createElement('a');
             link.href = url;
-            link.download = 'statistiques_poteaux.png';
+            link.download = 'statistiques_Transformateurs.png';
             link.click();
         }
 
         function exportStats() {
             const rows = [
-                ["Type", "Nombre de poteaux"],
+                ["Type", "Nombre de Transformateurs"],
                 ["PN7", taillePoche7],
                 ["PN8", taillePoche8],
                 ["PN9", taillePoche9],
@@ -46,21 +46,46 @@
             let csvContent = "data:text/csv;charset=utf-8," + rows.map(e => e.join(",")).join("\n");
             const link = document.createElement("a");
             link.href = encodeURI(csvContent);
-            link.download = "statistiques_poteaux.csv";
+            link.download = "statistiques_Transformateurs.csv";
             link.click();
         }
 
-        function updateKPI() {
+        /*function updateKPI() {
             const values = [taillePoche7, taillePoche8, taillePoche9, taillePoche11];
             const labels = ['PN7', 'PN8', 'PN9', 'PN11'];
             const total = values.reduce((a, b) => a + b, 0);
             const maxIndex = values.indexOf(Math.max(...values));
             const minIndex = values.indexOf(Math.min(...values));
 
-            document.getElementById('totalPoteaux').textContent = total;
+            document.getElementById('totalTransformateurs').textContent = total;
             document.getElementById('typeMax').textContent = `${labels[maxIndex]} (${values[maxIndex]})`;
             document.getElementById('typeMin').textContent = `${labels[minIndex]} (${values[minIndex]})`;
+        }*/
+
+        function updateKPI() {
+            document.getElementById('nbTriphases').textContent = nbTriphases;
+            document.getElementById('nbMonophases').textContent = nbMonophases;
+
+            // Génération dynamique des infos par feeder
+            const detailsContainer = document.getElementById('detailsFeeders');
+            detailsContainer.innerHTML = ''; // réinitialise
+
+            for (const feeder in compteursFeeders) {
+                const tri = compteursFeeders[feeder].tri;
+                const mono = compteursFeeders[feeder].mono;
+                if (tri > 0 || mono > 0) {
+                    const div = document.createElement('div');
+                    div.className = 'feeder-info';
+                    div.innerHTML = `
+                <strong>${feeder}</strong> contient 
+                <span style="color:#2e8b57">${tri}</span> transfo(s) triphasé(s) 
+                et <span style="color:#d2691e">${mono}</span> monophase(s). 
+            `;
+                    detailsContainer.appendChild(div);
+                }
+            }
         }
+
 
         /*function updateStatsTable() {
             const values = [tailleDepart, tailleBranche, tailleCabine, taillePoche7, taillePoche8, taillePoche9, taillePoche11];
@@ -123,7 +148,7 @@
                     data: {
                         labels: ['POCHE NOIRE 7', 'POCHE NOIRE 8', 'POCHE NOIRE 9', 'POCHE NOIRE 11'],
                         datasets: [{
-                            label: 'Nombre de poteaux',
+                            label: 'Nombre de Transformateurs',
                             data: dataArray,
                             backgroundColor: [
                                 '#00FFFF',
@@ -223,7 +248,7 @@
                     if (sidebar) sidebar.style.display = 'none';
                     if (overlay) overlay.style.display = 'none';
 
-                    
+
 
                     // Lancement de l'impression
                     setTimeout(() => {
@@ -259,6 +284,18 @@
         let taillePoche8 = 0;
         let taillePoche9 = 0;
         let taillePoche11 = 0;
+
+        let nbTriphases = 0;
+        let nbMonophases = 0;
+
+        // Compteurs par feeder
+        let compteursFeeders = {
+            PN7: { tri: 0, mono: 0 },
+            PN8: { tri: 0, mono: 0 },
+            PN9: { tri: 0, mono: 0 },
+            PN11: { tri: 0, mono: 0 },
+        };
+
 
 
         function initMap() {
@@ -304,10 +341,10 @@
                     <div id="layerControls"></div>
                     <h3>La taille</h3>
                    <div id="taillesContainer">
-                        <p> POCHE NOIRE 7 : 0 Poteaux</p>
-                        <p> POCHE NOIRE 8 : 0 Poteaux</p>
-                        <p> POCHE NOIRE 9 : 0 Poteaux</p>
-                        <p> POCHE NOIRE 11 : 0 Poteaux</p>
+                        <p> POCHE NOIRE 7 : 0 Transformateurs</p>
+                        <p> POCHE NOIRE 8 : 0 Transformateurs</p>
+                        <p> POCHE NOIRE 9 : 0 Transformateurs</p>
+                        <p> POCHE NOIRE 11 : 0 Transformateurs</p>
                    </div>
                    <div id="layerControls"></div>
                    <div id="layerControls"></div><div id="layerControls"></div>
@@ -374,6 +411,23 @@
 
                     updateTailleDisplay();
 
+
+
+                    data.forEach(item => {
+                        const puissance = item?.Cabines?.Puissance || "";
+                        const feeder = item?.Feeders || "AUTRE";
+
+                        if (puissance.startsWith("3x") || puissance.startsWith("3X")) {
+                            nbTriphases++;
+                            if (compteursFeeders[feeder]) compteursFeeders[feeder].tri++;
+                        } else {
+                            nbMonophases++;
+                            if (compteursFeeders[feeder]) compteursFeeders[feeder].mono++;
+                        }
+                    });
+
+                    updateKPI();
+
                     data.forEach(Cabines => {
 
                         //console.log(Cabines.Cabines);
@@ -388,6 +442,9 @@
                         //let obersvation = feature.properties.observations || "Aucune";
                         let description = Cabines.Cabines.Puissance || "Aucune";
                         let feeders = Cabines.Feeders;
+
+                        let type = Cabines.Cabines.Puissance.startsWith("3x") || Cabines.Cabines.Puissance.startsWith("3X") ? "Transfo Triphasé" : "Transfo Monophasé";
+                        let obs = Cabines.Cabines.Puissance.startsWith("3x") || Cabines.Cabines.Puissance.startsWith("3X") ? "Monté en PORTIQUE" : "Monté sur poteau PAM";
 
 
                         //let poteauType = feature.properties.type_poteau || "Inconnu";
@@ -412,13 +469,13 @@
                             newColor = "blue";
                         }*/
 
-                        if(feeders.includes("PN7")){
+                        if (feeders.includes("PN7")) {
                             newColor = "red";
                             //newLabel = "PAF";
-                        } else if(feeders.includes("PN8")){
+                        } else if (feeders.includes("PN8")) {
                             newColor = "yellow";
                             //newLabel = "PAM";
-                        } else if(feeders.includes("PN9")){
+                        } else if (feeders.includes("PN9")) {
                             newColor = "green";
                             //newLabel = "PAL";
                         } else {
@@ -431,7 +488,7 @@
                         position = { lat: lat, lng: long };
 
                         console.log(position);
-                        
+
                         /* if (isUTM(coords)) {
                             position = utmToLatLngWithProj4(long, lat, 33);
                         } else {
@@ -451,7 +508,7 @@
                         });
 
                         let infoWindow = new google.maps.InfoWindow({
-                            content: `<b>Nom : ${name}</b><br><b>Description :</b> ${description}<br><b>Feeders :</b> ${feeders}<br><b>Obersvation:</b> ${description}`
+                            content: `<b>Nom : ${name}</b><br><b>Description :</b> ${description} | ${type}<br><b>Feeders :</b> ${feeders} <br><b>Obersvation:</b> ${obs}`
                         });
 
                         marker.addListener("mouseover", () => {
@@ -578,7 +635,7 @@
                 });
                 let labelElement = document.createElement('label');
                 labelElement.htmlFor = cb.id;
-                labelElement.textContent = 'Poteaux';
+                labelElement.textContent = 'Transformateurs';
                 inner.appendChild(cb);
                 inner.appendChild(labelElement);
                 inner.appendChild(document.createElement('br'));
@@ -669,14 +726,14 @@
             var statas = document.getElementById('totalStats');
             if (!container) return;
             container.innerHTML = `
-                <p> POCHE NOIRE 7 : ${typeof taillePoche7 !== 'undefined' ? taillePoche7 : 0} Poteaux</p>
-                <p> POCHE NOIRE 8 : ${typeof taillePoche8 !== 'undefined' ? taillePoche8 : 0} Poteaux</p>
-                <p> POCHE NOIRE 9 : ${typeof taillePoche9 !== 'undefined' ? taillePoche9 : 0} Poteaux</p>
-                <p> POCHE NOIRE 11 : ${typeof taillePoche11 !== 'undefined' ? taillePoche11 : 0} Poteaux</p>
+                <p> POCHE NOIRE 7 : ${typeof taillePoche7 !== 'undefined' ? taillePoche7 : 0} Transformateurs</p>
+                <p> POCHE NOIRE 8 : ${typeof taillePoche8 !== 'undefined' ? taillePoche8 : 0} Transformateurs</p>
+                <p> POCHE NOIRE 9 : ${typeof taillePoche9 !== 'undefined' ? taillePoche9 : 0} Transformateurs</p>
+                <p> POCHE NOIRE 11 : ${typeof taillePoche11 !== 'undefined' ? taillePoche11 : 0} Transformateurs</p>
             `;
 
             if (statas) {
-                let total = 
+                let total =
                     (typeof taillePoche7 !== 'undefined' ? taillePoche7 : 0) +
                     (typeof taillePoche8 !== 'undefined' ? taillePoche8 : 0) +
                     (typeof taillePoche9 !== 'undefined' ? taillePoche9 : 0) +
@@ -971,6 +1028,20 @@
             text-align: center;
         }
 
+        .details-container {
+            margin-top: 20px;
+            font-size: 15px;
+            line-height: 1.6;
+        }
+
+        .feeder-info {
+            background: #fafafa;
+            border-left: 4px solid #007bff;
+            margin-bottom: 10px;
+            padding: 8px 12px;
+            border-radius: 6px;
+        }
+
         .stats-table {
             width: 100%;
             border-collapse: collapse;
@@ -984,12 +1055,14 @@
             text-align: center;
         }
 
-        @media print{
-            #kpiContainer, #exportBtn,  #printOptionsContainer{
+        @media print {
+
+            #kpiContainer,
+            #exportBtn,
+            #printOptionsContainer {
                 display: none;
             }
         }
-        
     </style>
 </head>
 
@@ -1024,17 +1097,21 @@
 
         <div class="kpi-container" id="kpiContainer">
             <div class="kpi-card">
-                <h4>Total Poteaux</h4>
-                <p id="totalPoteaux"></p>
+                <h4>Transformateurs Triphasés</h4>
+                <p id="nbTriphases">0</p>
+                <small>Installés sur portiques</small>
             </div>
             <div class="kpi-card">
-                <h4>Type le plus fréquent</h4>
-                <p id="typeMax"></p>
+                <h4>Transformateurs Monophasés</h4>
+                <p id="nbMonophases">0</p>
+                <small>Installés sur poteaux PAM</small>
             </div>
-            <div class="kpi-card">
-                <h4>Type le moins fréquent</h4>
-                <p id="typeMin"></p>
-            </div>
+        </div>
+
+        <hr>
+
+        <div id="detailsFeeders" class="details-container">
+            <!-- Les détails par feeder apparaîtront ici -->
         </div>
 
         <!-- <select id="chartTypeSelect">
@@ -1045,16 +1122,16 @@
 
         <div id="exportBtn">
             <button
-            style="padding:12px 24px;border-radius:8px;border:none;background:linear-gradient(90deg,#007bff 60%,#0056b3 100%);color:white;cursor:pointer;font-size:1.1rem;font-weight:600;box-shadow:0 2px 8px rgba(0,0,0,0.10);transition:background 0.2s,box-shadow 0.2s;margin-top:12px;"
-            onclick="exportStats()">
-            Exporter CSV</button>
-        <button
-            style="padding:12px 24px;border-radius:8px;border:none;background:linear-gradient(90deg,#007bff 60%,#0056b3 100%);color:white;cursor:pointer;font-size:1.1rem;font-weight:600;box-shadow:0 2px 8px rgba(0,0,0,0.10);transition:background 0.2s,box-shadow 0.2s;margin-top:12px;"
-            onclick="exportChart()">
-            Exporter PDF</button>
+                style="padding:12px 24px;border-radius:8px;border:none;background:linear-gradient(90deg,#007bff 60%,#0056b3 100%);color:white;cursor:pointer;font-size:1.1rem;font-weight:600;box-shadow:0 2px 8px rgba(0,0,0,0.10);transition:background 0.2s,box-shadow 0.2s;margin-top:12px;"
+                onclick="exportStats()">
+                Exporter CSV</button>
+            <button
+                style="padding:12px 24px;border-radius:8px;border:none;background:linear-gradient(90deg,#007bff 60%,#0056b3 100%);color:white;cursor:pointer;font-size:1.1rem;font-weight:600;box-shadow:0 2px 8px rgba(0,0,0,0.10);transition:background 0.2s,box-shadow 0.2s;margin-top:12px;"
+                onclick="exportChart()">
+                Exporter PDF</button>
         </div>
 
-        
+
 
 
 
@@ -1064,7 +1141,7 @@
             <thead>
                 <tr>
                     <th>Type</th>
-                    <th>Nombre de poteaux</th>
+                    <th>Nombre de Transformateurs</th>
                     <th>Pourcentage</th>
                 </tr>
             </thead>
@@ -1074,8 +1151,8 @@
     </div>
 
     <div id="printTab" class="tab-content" style="display:none;padding:12px;">
-        <div
-            style="background:#fff;border-radius:14px;box-shadow:0 2px 12px rgba(0,0,0,0.07);padding:18px 20px 10px 20px;margin-bottom:18px;" id="printOptionsContainer">
+        <div style="background:#fff;border-radius:14px;box-shadow:0 2px 12px rgba(0,0,0,0.07);padding:18px 20px 10px 20px;margin-bottom:18px;"
+            id="printOptionsContainer">
             <h3 style="color:#007bff;margin-top:0;">Impression personnalisée</h3>
             <p style="font-size:1.08rem;">Choisissez les éléments à inclure dans l'impression :</p>
             <label style="margin-bottom:8px;"><input type="checkbox" id="printMap" checked> Inclure la carte</label><br>
