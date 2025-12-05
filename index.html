@@ -756,6 +756,9 @@
             background: #f4f7fa;
             margin: 0;
             color: #222;
+
+            scrollbar-width: thin;
+            scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
         }
 
         /* Sidebar modernisé */
@@ -887,6 +890,9 @@
             border-bottom: 1px solid #e3eaf3;
             height: 56px;
             align-items: center;
+
+            scrollbar-width: thin;
+            scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
         }
 
         .tab-btn {
@@ -924,6 +930,9 @@
             height: calc(100vh - 56px);
             overflow-y: auto;
             animation: fadeIn 0.5s;
+
+            scrollbar-width: thin;
+            scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
         }
 
         .tab-content.active {
@@ -1068,7 +1077,7 @@
             }
         }
 
-       
+
         .modal {
             display: none;
             position: fixed;
@@ -1081,7 +1090,7 @@
             backdrop-filter: blur(3px);
         }
 
-       
+
         .modal-content {
             background-color: #fff;
             margin: 5% auto;
@@ -1090,19 +1099,37 @@
             width: 90%;
             max-width: 520px;
             max-height: 80vh;
-          
+
             overflow: hidden;
-           
+
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
             animation: fadeInModal .35s ease;
         }
 
-       
+
         .modal-scroll {
             overflow-y: auto;
             padding: 20px;
             max-height: 75vh;
-            
+
+            scrollbar-width: thin;
+            scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
+
+        }
+
+        .modal-scroll::-webkit-scrollbar {
+            width: 6px;
+            /* épaisseur fine */
+        }
+
+        .modal-scroll::-webkit-scrollbar-track {
+            background: transparent;
+            /* pas de track visible */
+        }
+
+        .modal-scroll::-webkit-scrollbar-thumb {
+            background-color: rgba(0, 0, 0, 0.15);
+            border-radius: 3px;
         }
 
         .modal-scroll img {
@@ -1302,7 +1329,7 @@
         <p style="font-size:1.08rem;">Ce projet cartographique est développé pour la visualisation et l'analyse des
             réseaux UNKRA.<br>Version 2025. UI modernisée et développée par Barthelemy MONKILA NKIWA.</p> <br>
         <p style="font-size:1.08rem;">Téléphone : +243815992630 | +243898943147</p>
-        <p style="font-size:1.08rem;">Email :<a href="mailto:bmonkila@gmail.com">bmonkila@gmail.com</a> | <a
+        <p style="font-size:1.08rem;">Email :<a href="mailto:mnkiwa@gmail.com">mnkiwa@gmail.com</a> | <a
                 href="mailto:bmonkila@isptkin.ac.cd">bmonkila@isptkin.ac.cd</a></p>
 
         <p style="margin-top:18px;">&copy; 2025 UNKRA. Tous droits réservés.</p>
