@@ -744,6 +744,10 @@
 
 
     </script>
+
+
+
+
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
 
@@ -1063,8 +1067,125 @@
                 display: none;
             }
         }
+
+       
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.45);
+            backdrop-filter: blur(3px);
+        }
+
+       
+        .modal-content {
+            background-color: #fff;
+            margin: 5% auto;
+            padding: 0;
+            border-radius: 14px;
+            width: 90%;
+            max-width: 520px;
+            max-height: 80vh;
+          
+            overflow: hidden;
+           
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
+            animation: fadeInModal .35s ease;
+        }
+
+       
+        .modal-scroll {
+            overflow-y: auto;
+            padding: 20px;
+            max-height: 75vh;
+            
+        }
+
+        .modal-scroll img {
+            width: 100%;
+            border-radius: 10px;
+            margin-top: 10px;
+        }
+
+        /* Bouton fermer */
+        .close {
+            color: #444;
+            float: right;
+            margin: 10px;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover {
+            color: #ff4444;
+        }
+
+        @keyframes fadeInModal {
+            from {
+                opacity: 0;
+                transform: scale(.8);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
     </style>
 </head>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        console.log("DOM LOADED ✔");
+
+        const cardTriphase = document.getElementById("cardTriphase");
+        const cardMonophase = document.getElementById("cardMonophase");
+        const modal = document.getElementById("transfoModal");
+        const modalTitle = document.getElementById("modalTitle");
+        const modalImg = document.getElementById("modalImage");
+        const closeBtn = document.querySelector(".close");
+
+        console.log("cardTriphase =", cardTriphase);
+        console.log("cardMonophase =", cardMonophase);
+        console.log("modal =", modal);
+
+        if (!cardTriphase || !cardMonophase || !modal) {
+            //alert("❌ Un élément est introuvable ! Vérifie les IDs HTML");
+            return;
+        }
+
+        cardTriphase.addEventListener("click", () => {
+            console.log("Triphasé cliqué");
+            modalTitle.innerText = "Transformateur triphasé (Portique)";
+            modalImg.src = "portique.jpeg";
+            modal.style.display = "block";
+        });
+
+        cardMonophase.addEventListener("click", () => {
+            console.log("Monophasé cliqué");
+            modalTitle.innerText = "Transformateur monophasé (poteau PAM)";
+            modalImg.src = "pam.jpeg";
+            modal.style.display = "block";
+        });
+
+        closeBtn.onclick = () => {
+            modal.style.display = "none";
+        };
+
+        window.onclick = (event) => {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        };
+    });
+</script>
+
+
 
 <body onload="initMap()">
     <button id="openSidebarBtn" title="Afficher le menu"><span style="font-size:1.7rem;">☰</span></button>
@@ -1096,12 +1217,12 @@
 
 
         <div class="kpi-container" id="kpiContainer">
-            <div class="kpi-card">
+            <div class="kpi-card" id="cardTriphase">
                 <h4>Transformateurs Triphasés</h4>
                 <p id="nbTriphases">0</p>
                 <small>Installés sur portiques</small>
             </div>
-            <div class="kpi-card">
+            <div class="kpi-card" id="cardMonophase">
                 <h4>Transformateurs Monophasés</h4>
                 <p id="nbMonophases">0</p>
                 <small>Installés sur poteaux PAM</small>
@@ -1179,10 +1300,25 @@
     <div id="aboutTab" class="tab-content" style="display:none;">
         <h2 style="color:#007bff;">À propos</h2>
         <p style="font-size:1.08rem;">Ce projet cartographique est développé pour la visualisation et l'analyse des
-            réseaux UNKRA.<br>Version 2025. UI modernisée et développée par Barthelemy MONKILA NKIWA.</p>
+            réseaux UNKRA.<br>Version 2025. UI modernisée et développée par Barthelemy MONKILA NKIWA.</p> <br>
+        <p style="font-size:1.08rem;">Téléphone : +243815992630 | +243898943147</p>
+        <p style="font-size:1.08rem;">Email :<a href="mailto:bmonkila@gmail.com">bmonkila@gmail.com</a> | <a
+                href="mailto:bmonkila@isptkin.ac.cd">bmonkila@isptkin.ac.cd</a></p>
+
         <p style="margin-top:18px;">&copy; 2025 UNKRA. Tous droits réservés.</p>
     </div>
     <!-- === fin tabs === -->
+
+    <div id="transfoModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div class="modal-scroll">
+                <h3 id="modalTitle"></h3>
+                <img id="modalImage" src="" alt="" />
+            </div>
+        </div>
+    </div>
+
 
 </body>
 
